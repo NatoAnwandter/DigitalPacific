@@ -11,6 +11,9 @@ class Frecuencia(models.Model):
     id_frecuencia = models.AutoField(primary_key=True)
     dias = models.IntegerField()
 
+    def nombre_frecuencia(self):
+        return "{}". format(self.dias)
+
     def __str__(self):
         return self.dias
 
@@ -104,8 +107,8 @@ class Perfil_emprendedora(models.Model):
     nombre = models.CharField(max_length=75)    
     fecha_nacimiento = models.DateField()   
     email = models.CharField(max_length=45)   
-    telefono = models.IntegerField(max_length=9)   
-    whatsapp = models.IntegerField(max_length=9)   
+    telefono = models.IntegerField()   
+    whatsapp = models.IntegerField()   
     telegram = models.CharField(max_length=30)   
     direccion = models.TextField(max_length=100)   
     id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
