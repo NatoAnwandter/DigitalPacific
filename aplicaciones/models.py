@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.db import models
+from django.contrib.auth.models import User
 
 #Create your models here.
 
@@ -22,8 +23,14 @@ class Despacho(models.Model):
     id_empresa = models.AutoField(primary_key=True)
     disponible = models.BooleanField()
 
-    def __str__(self):
-        return self.disponible
+    #ARREGLAR def nombre_despacho(self):
+        # string st
+        # mybool = self.disponible
+        # if mybool : st ="no"
+        # else: st ="si"
+        # # return "{}". format(self.disponible)
+    def __str__(mybool):
+        return st
 
 
 class Cantidad(models.Model):
@@ -38,7 +45,8 @@ class Cantidad(models.Model):
 class Asesoria_contable(models.Model):
     id_asesoria_contable = models.AutoField(primary_key=True)
     tiene_asesoria = models.BooleanField()
-
+    def nombre_tiene_asesoria(self):
+        return "{}". format(self.tiene_asesoria)
     def __str__(self):
         return self.nombre
 
@@ -91,15 +99,6 @@ class Industria(models.Model):
     def __str__(self):
         return self.nombre
 
-
-class User(models.Model):
-    id_user = models.AutoField(primary_key=True)
-    password = models.CharField(max_length=8)    
-    name = models.CharField(max_length=45) 
-    tipo_permiso = models.CharField(max_length=45)
-
-    def __str__(self):
-        return self.nombre
 
 
 class Perfil_emprendedora(models.Model):
