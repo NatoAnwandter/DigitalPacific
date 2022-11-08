@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,19 +81,33 @@ WSGI_APPLICATION = 'Digital_Pacific.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+#LEER *** LEER *** LEER *** LEER *** LEER
+#si te conectas desde PA, deja comentado el DATABASES de digital pacific y descomenta el DATABASES  de Nato$default
+
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'digitalpacific',                      # Or path to database file if using sqlite3.                                                   # The following settings are not used with sqlite3:
         'USER': 'administrador',
         'PASSWORD': 'pass',
         'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '3306',   
+        'PORT': '3306',
     }
 }
 
+# DATABASES = {
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'Nato$default',                      # Or path to database file if using sqlite3.                                                   # The following settings are not used with sqlite3:
+#         'USER': 'Nato',
+#         'PASSWORD': 'administrador',
+#         'HOST': 'Nato.mysql.pythonanywhere-services.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -130,7 +145,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 #descomentar static_root y comentar STATICFILES_DIRS para lanzar un collecttatic
 

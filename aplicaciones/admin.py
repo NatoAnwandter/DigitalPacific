@@ -2,7 +2,6 @@ from django.contrib import admin
 from .models import *
 
 # Register your models here.
-admin.site.register(User)
 admin.site.register(Perfil_emprendedora)
 admin.site.register(Emprendimiento)
 admin.site.register(Asesoria_contable)
