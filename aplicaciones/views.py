@@ -1,15 +1,49 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import Perfil_emprendedoraForm
+from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm
+from .models import Emprendimiento ,Producto
+
 
 def home(request): 
     return render(request,'home.html')
 
 def emprendimiento(request):
-    return render(request,'app/emprendimiento/agregar_emprendimiento.html')
+    # registros = Perfil_emprendedora.objects.filter(usuario=request.user)
+    emprendimientos = Emprendimiento.objects.all()
+    
+    data = {
+        'form':EmprendimientoForm(),
+        'emprendimientos': emprendimientos
+    }
+
+    if request.method == 'POST':
+        formulario = EmprendimientoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "emprendimiento guardado"          
+        else:
+            data["mensaje"] = formulario
+
+    return render(request,'app/emprendimiento/agregar_emprendimiento.html', data)
+
 
 def producto(request):
-    return render(request,'app/emprendimiento/producto/agregar_producto.html')
+    productos = Producto.objects.all()
+
+    data = {
+        'form':ProductoForm(),
+        'productos': productos
+    }
+
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "producto guardado"          
+        else:
+            data["mensaje"] = formulario
+
+    return render(request,'app/emprendimiento/producto/agregar_producto.html', data)
 
 
 def insumo(request):
@@ -38,6 +72,7 @@ def emprendedora(request):
         if formulario.is_valid():
             formulario.save()
             data["mensaje"] = "perfil_emprendedora guardado"
+            
         else:
             data["mensaje"] = formulario
 

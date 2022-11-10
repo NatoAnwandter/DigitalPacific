@@ -23,14 +23,15 @@ class Despacho(models.Model):
     id_empresa = models.AutoField(primary_key=True)
     disponible = models.BooleanField()
 
-    #ARREGLAR def nombre_despacho(self):
-        # string st
-        # mybool = self.disponible
-        # if mybool : st ="no"
-        # else: st ="si"
-        # # return "{}". format(self.disponible)
+    def esta_disponible(self):
+        result = "{}". format(self.disponible)
+        if result == "True":
+            return "Si"
+        else:
+            return "No"
+
     def __str__(mybool):
-        return st
+        return self.esta_disponible()
 
 
 class Cantidad(models.Model):
@@ -46,9 +47,14 @@ class Asesoria_contable(models.Model):
     id_asesoria_contable = models.AutoField(primary_key=True)
     tiene_asesoria = models.BooleanField()
     def nombre_tiene_asesoria(self):
-        return "{}". format(self.tiene_asesoria)
+        result = "{}". format(self.tiene_asesoria)
+        if result == "True":
+            return "Si"
+        else:
+            return "No"
+        
     def __str__(self):
-        return self.nombre
+        return self.nombre_tiene_asesoria()
 
 
 class Marketing(models.Model):
@@ -56,7 +62,7 @@ class Marketing(models.Model):
     name = models.CharField(max_length=75)   
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 
 class Industria(models.Model):
@@ -64,7 +70,7 @@ class Industria(models.Model):
     name = models.CharField(max_length=45) 
     
     def __str__(self):
-        return self.nombre
+        return self.name
 
 class Region(models.Model):
     id_region = models.AutoField(primary_key=True)
@@ -74,25 +80,25 @@ class Region(models.Model):
         return self.nombre
 
 class Provincia(models.Model):
+    id_region = models.ForeignKey(Region, on_delete=models.CASCADE)
     id_provincia = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
-    id_region = models.ForeignKey(Region, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.nombre
 
 
 class Comuna(models.Model):
+    id_provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
     id_comuna = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
-
-
+    
     def __str__(self):
         return self.nombre
 
 
 class Perfil_emprendedora(models.Model):
+    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_perfil_emprendedora = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=75)    
     fecha_nacimiento = models.DateField()   
@@ -101,43 +107,42 @@ class Perfil_emprendedora(models.Model):
     whatsapp = models.IntegerField()   
     telegram = models.CharField(max_length=30)   
     direccion = models.TextField(max_length=100)   
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.nombre 
 
 class Emprendimiento(models.Model):
+    id_perfil_emprendedora = models.ForeignKey(Perfil_emprendedora, on_delete=models.CASCADE)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
+    id_industria = models.ForeignKey(Industria, on_delete=models.CASCADE)
     id_emprendimiento = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=55)    
     email = models.CharField(max_length=125)    
     website = models.CharField(max_length=300)
     id_marketing = models.ForeignKey(Marketing, on_delete=models.CASCADE)
     id_asesoria_contable = models.ForeignKey(Asesoria_contable, on_delete=models.CASCADE)
-    id_perfil_emprendedora = models.ForeignKey(Perfil_emprendedora, on_delete=models.CASCADE)
-    id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
-    id_industria = models.ForeignKey(Industria, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.nombre
 
 
 
 class Producto(models.Model):
+    id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
     id_producto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
     id_despacho = models.ForeignKey(Despacho, on_delete=models.CASCADE)
-    id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
-        
+            
     def __str__(self):
         return self.nombre
 
 class Insumo(models.Model):
+    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     id_insumo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
     id_cantidad = models.ForeignKey(Cantidad, on_delete=models.CASCADE)
     id_frecuencia = models.ForeignKey(Frecuencia, on_delete=models.CASCADE)
-    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.nombre
 
