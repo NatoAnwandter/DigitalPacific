@@ -18,6 +18,9 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/estilo.css' %}" />
 	</head>
+	{% block css %}
+	{% endblock %} 
+
   {% block body-style %}
     
   {% endblock %}
@@ -162,14 +165,16 @@
 
 		</div>
 
-		{% block js %}
+	{% block js %}
     <!-- Scripts -->
-      <script src="{% static 'assets/js/jquery.min.js' %}"></script>
-      <script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
-      <script src="{% static 'assets/js/browser.min.js' %}"></script>
-      <script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
-      <script src="{% static 'assets/js/util.js' %}"></script>
-      <script src="{% static 'assets/js/main.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+	<script src="{% static 'assets/js/browser.min.js' %}"></script>
+	<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+	<script src="{% static 'assets/js/util.js' %}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+	<!-- <script src="{% url 'js-catalog' %}"></script>
+    <script src="{% static '/admin/js/core.js' %}"></script> -->
     {% endblock %}       
 
 	</body>

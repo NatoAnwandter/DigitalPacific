@@ -27,10 +27,12 @@ class Despacho(models.Model):
         result = "{}". format(self.disponible)
         if result == "True":
             return "Si"
-        else:
+        if result == "False":
             return "No"
+        else:
+            return "Quizas"
 
-    def __str__(mybool):
+    def __str__(self):
         return self.esta_disponible()
 
 
@@ -50,8 +52,10 @@ class Asesoria_contable(models.Model):
         result = "{}". format(self.tiene_asesoria)
         if result == "True":
             return "Si"
-        else:
+        if result == "False":
             return "No"
+        else:
+            return "Quizas"
         
     def __str__(self):
         return self.nombre_tiene_asesoria()
@@ -119,8 +123,8 @@ class Emprendimiento(models.Model):
     nombre = models.CharField(max_length=55)    
     email = models.CharField(max_length=125)    
     website = models.CharField(max_length=300)
-    id_marketing = models.ForeignKey(Marketing, on_delete=models.CASCADE)
-    id_asesoria_contable = models.ForeignKey(Asesoria_contable, on_delete=models.CASCADE)
+    id_marketing = models.ForeignKey(Marketing, on_delete=models.SET_NULL, blank=True, null=True)
+    id_asesoria_contable = models.ForeignKey(Asesoria_contable, on_delete=models.SET_NULL, blank=True, null=True)
     
     def __str__(self):
         return self.nombre
@@ -131,7 +135,7 @@ class Producto(models.Model):
     id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
     id_producto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
-    id_despacho = models.ForeignKey(Despacho, on_delete=models.CASCADE)
+    id_despacho = models.ForeignKey(Despacho, on_delete=models.SET_NULL, blank=True, null=True)
             
     def __str__(self):
         return self.nombre
@@ -140,8 +144,8 @@ class Insumo(models.Model):
     id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     id_insumo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
-    id_cantidad = models.ForeignKey(Cantidad, on_delete=models.CASCADE)
-    id_frecuencia = models.ForeignKey(Frecuencia, on_delete=models.CASCADE)
+    id_cantidad = models.ForeignKey(Cantidad, on_delete=models.SET_NULL, blank=True, null=True )
+    id_frecuencia = models.ForeignKey(Frecuencia, on_delete=models.SET_NULL, blank=True, null=True )
     
     def __str__(self):
         return self.nombre

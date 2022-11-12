@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm
 from .models import Emprendimiento ,Producto
+
 
 
 def home(request): 
@@ -71,7 +73,10 @@ def emprendedora(request):
         formulario = Perfil_emprendedoraForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
+            
             data["mensaje"] = "perfil_emprendedora guardado"
+            # aca poner funcion redirect to emprendimiento    --------------------------------
+            return redirect(to='emprendimiento')
             
         else:
             data["mensaje"] = formulario
