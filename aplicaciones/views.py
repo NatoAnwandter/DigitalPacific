@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm
-from .models import Emprendimiento ,Producto
+from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm, InsumoForm, CantidadForm
+from .models import Emprendimiento ,Producto, Insumo, Cantidad
 
 
 
@@ -49,7 +49,22 @@ def producto(request):
 
 
 def insumo(request):
-    return render(request,'app/emprendimiento/producto/insumo/agregar_insumo.html')
+    insumos = Insumo.objects.all()
+
+    data = {
+        'form':InsumoForm(),
+        'insumos': insumos
+    }
+
+    if request.method == 'POST':
+        formulario = InsumoForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "insumo guardado"          
+        else:
+            data["mensaje"] = formulario
+
+    return render(request,'app/emprendimiento/producto/insumo/agregar_insumo.html',data)
 
 
 def marketing(request):
@@ -62,7 +77,7 @@ def asesoria_contable(request):
 
 
 
-# ****************------------FORMS------------*******************
+# ****************------------FORMS Emprendedora------------*******************
 
 def emprendedora(request):
     data = {
@@ -82,3 +97,24 @@ def emprendedora(request):
             data["mensaje"] = formulario
 
     return render(request,'app/emprendedora/agregar_emprendedora.html', data)
+
+
+def cantidad(request):
+    cantidads = Cantidad.objects.all()
+
+    data = {
+        'form':CantidadForm(),
+        'cantidads': cantidads
+    }
+
+    if request.method == 'POST':
+        formulario = CantidadForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Cantidad guardada"          
+        else:
+            data["mensaje"] = formulario
+
+    return render(request,'app/emprendimiento/producto/insumo/cantidad/agregar_cantidad.html',data)
+
+

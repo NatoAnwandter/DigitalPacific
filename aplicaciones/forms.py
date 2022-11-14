@@ -1,5 +1,5 @@
 from django import forms
-from .models import Perfil_emprendedora, Emprendimiento, Producto
+from .models import Perfil_emprendedora, Emprendimiento, Producto, Insumo, Cantidad
 
 
 class Perfil_emprendedoraForm(forms.ModelForm):
@@ -13,7 +13,8 @@ class Perfil_emprendedoraForm(forms.ModelForm):
         require_css_class = 'required-field'
         
         widgets = {        
-        "fecha_nacimiento": forms.SelectDateWidget(years=range(1955, 2007), ), 
+        # "fecha_nacimiento": forms.SelectDateWidget(years=range(1955, 2007), ),
+        "fecha_nacimiento": forms.DateInput(attrs={'type': 'date'}),
         "direccion" : forms.Textarea(attrs={"rows":3})                
         }
 
@@ -56,6 +57,7 @@ class ProductoForm(forms.ModelForm):
     class Meta:
         model = Producto
         fields = ["id_emprendimiento", "id_producto", "nombre", "id_despacho"]
+        # fields = '__all__'
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)
@@ -63,3 +65,24 @@ class ProductoForm(forms.ModelForm):
         self.fields['id_emprendimiento'].label = 'emprendimiento'
         self.fields['nombre'].label = 'producto'
         self.fields['id_despacho'].label = 'incluye despacho'
+
+class InsumoForm(forms.ModelForm):
+
+    class Meta:      
+        model = Insumo
+        fields = ["id_producto", "id_insumo", "nombre", "id_cantidad", "id_frecuencia"]
+
+    def __init__(self,*args, **kwards):
+        super().__init__(*args, **kwards)
+        self.fields['id_producto'].label = 'producto'
+        self.fields['nombre'].label = 'insumo'
+        self.fields['id_cantidad'].label = 'cantidad'
+        self.fields['id_frecuencia'].label = 'frecuencia'
+
+class CantidadForm(forms.ModelForm):
+
+    class Meta:    
+        model = Cantidad
+        fields = ["id_cantidad", "tipo", "cantidad"]    
+
+    

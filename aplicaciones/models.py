@@ -13,14 +13,14 @@ class Frecuencia(models.Model):
     dias = models.IntegerField()
 
     def nombre_frecuencia(self):
-        return "{}". format(self.dias)
+        result = "{}". format(self.dias)
+        return result +' días'
 
     def __str__(self):
-        return self.dias
-
+        return self.nombre_frecuencia()
 
 class Despacho(models.Model):
-    id_empresa = models.AutoField(primary_key=True)
+    id_despacho = models.AutoField(primary_key=True)
     disponible = models.BooleanField()
 
     def esta_disponible(self):
@@ -37,12 +37,28 @@ class Despacho(models.Model):
 
 
 class Cantidad(models.Model):
+    OPCIONES =(
+            ('Kilos','Kilos'),
+            ('Gramos','Gramos'),
+            ('Litros','Litros'),
+            ('Metros','Metros'),
+            ('Metros²','Metros²'),
+            ('Metros³','Metros³'),
+            ('Centimetros','Centimetros'),
+            ('Unidad(es)','Unidad(es)')
+        )
+
     id_cantidad = models.AutoField(primary_key=True)
-    tipo = models.CharField(max_length=(70))
+    tipo = models.CharField(choices=OPCIONES,max_length=(70))
     cantidad = models.IntegerField()
 
+    def valor_compuesto(self):
+        result1 = "{}". format(self.tipo)
+        result2 = "{}". format(self.cantidad)
+        return  result2 +' '+ result1 
+
     def __str__(self):
-        return self.tipo
+        return self.valor_compuesto()
 
 
 class Asesoria_contable(models.Model):
