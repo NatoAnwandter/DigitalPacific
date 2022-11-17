@@ -1,5 +1,9 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path,include
+from django.conf import settings
 from .views import home, emprendimiento, producto, insumo, marketing, asesoria_contable, emprendedora, cantidad 
+ 
+
 
 urlpatterns = [
     path('', home, name = 'home'),
@@ -10,7 +14,8 @@ urlpatterns = [
     path('asesoria_contable/', asesoria_contable, name = 'asesoria_contable'),
     path('emprendedora/', emprendedora, name = 'emprendedora'),
     path('cantidad/', cantidad, name = 'cantidad'),
-    # path('frecuencia/', frecuencia, name = 'frecuencia'),
+    path('accounts/',include('django.contrib.auth.urls')),
+    
     
     
 ]

@@ -37,14 +37,14 @@ LOGOUT_REDIRECT_URL = '/'
 
 INSTALLED_APPS = [
     'admin_interface',
-    'django.contrib.admin',
+    'colorfield',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aplicaciones.apps.AplicacionesConfig',
-    'colorfield',
+    'django.contrib.admin',
     'crispy_forms',
     
 ]
@@ -155,6 +155,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = 'static/'
+# STATIC_ROOT = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
  
 #Configuracion para agregar campos al usuario
