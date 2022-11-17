@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm, InsumoForm, CantidadForm
 from .models import Emprendimiento ,Producto, Insumo, Cantidad
 
+from django.contrib import messages
 
 
 def home(request): 
@@ -21,8 +22,10 @@ def emprendimiento(request):
     if request.method == 'POST':
         formulario = EmprendimientoForm(data=request.POST)
         if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "emprendimiento guardado"          
+            formulario.save()           
+
+            messages.success(request, "#")
+            # data["mensaje"] = "emprendimiento guardado"          
         else:
             data["mensaje"] = formulario
 
@@ -41,7 +44,9 @@ def producto(request):
         formulario = ProductoForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"] = "producto guardado"          
+
+            messages.success(request, "#")
+            # data["mensaje"] = "producto guardado"          
         else:
             data["mensaje"] = formulario
 
@@ -111,7 +116,8 @@ def cantidad(request):
         formulario = CantidadForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"] = "Cantidad guardada"          
+
+            messages.success(request, "#")         
         else:
             data["mensaje"] = formulario
 

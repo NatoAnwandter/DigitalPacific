@@ -12,3 +12,21 @@
 #footer-wrapper {
     padding: 1em 0 0.5em 0!important;
 }
+
+.not-visible{
+    display: none;
+}
+
+.scrolled {
+    height: 500px;
+    width: auto;
+    overflow-y: scroll;
+
+}
+
+.scrolled::-webkit-scrollbar {
+    width: 8px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+    display: none;  /* Ocultar scroll */
+}
+

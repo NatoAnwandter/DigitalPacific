@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+MESSAGE_STORAGE= "django.contrib.messages.storage.cookie.CookieStorage"
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -36,17 +36,21 @@ LOGOUT_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aplicaciones',
+    'aplicaciones.apps.AplicacionesConfig',
     'colorfield',
     'crispy_forms',
     
 ]
+
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -94,10 +98,10 @@ DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'digitalpacific1',                      # Or path to database file if using sqlite3.                                                   # The following settings are not used with sqlite3:
-        'USER': 'administracion',
-        'PASSWORD': 'pass',
-        'HOST': '127.0.0.1',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        'NAME': 'bd_pacific',                      # Or path to database file if using sqlite3.                                                   # The following settings are not used with sqlite3:
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '3306',
     }
 }
@@ -153,6 +157,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
  
+#Configuracion para agregar campos al usuario
+AUTH_USER_MODEL = 'aplicaciones.Usuario'
+
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 #descomentar static_root y comentar STATICFILES_DIRS para lanzar un collecttatic
 

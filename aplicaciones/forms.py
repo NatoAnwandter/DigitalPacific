@@ -6,8 +6,8 @@ class Perfil_emprendedoraForm(forms.ModelForm):
     
     class Meta:
         model = Perfil_emprendedora
-        fields = ["id_user","nombre","fecha_nacimiento",
-        "email", "telefono", "whatsapp", "telegram", "direccion"]
+        fields = ["id_user","fecha_nacimiento",
+        "telefono", "whatsapp", "telegram", "direccion"]
         
         error_css_class = 'error-field'
         require_css_class = 'required-field'
@@ -20,25 +20,18 @@ class Perfil_emprendedoraForm(forms.ModelForm):
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)
-        self.fields['id_user'].label = 'tipo de usuario'
+        self.fields['id_user'].label = 'Usuario'
         
         # fields = '__all__'
         
 class EmprendimientoForm(forms.ModelForm):
     
-    # name = forms.CharField(widget=forms.TextInput(attrs={"class":"form-control", 
-    # "placeholder":"Nombre emprendimiento"}))
     class Meta:
         model = Emprendimiento
         fields = ["id_perfil_emprendedora", "id_comuna", "id_industria", "id_emprendimiento", "nombre", "email", "website", "id_marketing", "id_asesoria_contable"]
         
         error_css_class = 'error-field'
         require_css_class = 'required-field'
-
-        # widgets={
-        # "nombre" : forms.TextInput(attrs={"class":"form-control", 
-        #                                 "placeholder" : "Nombre de su emprendimiento"})
-        # } 
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)

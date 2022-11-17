@@ -3,9 +3,45 @@ from django.db import models
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-#Create your models here.
+class Tipo_usuario(models.Model):   
+    ACCESOS=(('Administrador','Administrador'),
+            ('Consultor','Consultor'),
+            ('Emprendedor','Emprendedor')) 
+    tipo = models.CharField(choices=ACCESOS, max_length=200)
+    descripcion = models.CharField(max_length=500)
 
+    def __str__(self):
+        return self.tipo
+# -----------------------------------------------------AGREGAR CAMPOS A AUTH USER ADMIN DJANGO ----------------------------------------------
+class Usuario(AbstractUser):
+    tipo_usuario=models.ForeignKey(Tipo_usuario, on_delete = models.CASCADE, null=True)
+    
+    def __str__(self):
+        return self.username
+
+    def has_perm(self,perm,obj = None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True   
+
+class Perfil_emprendedora(models.Model):
+    id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    id_perfil_emprendedora = models.AutoField(primary_key=True)   
+    fecha_nacimiento = models.DateField()     
+    telefono = models.IntegerField()   
+    whatsapp = models.IntegerField()   
+    telegram = models.CharField(max_length=30)   
+    direccion = models.TextField(max_length=100)   
+    
+    def nombre_user(self):
+        result = "{}". format(self. id_user)
+        return result
+        
+    def __str__(self):
+        return self.nombre_user() 
 
 
 class Frecuencia(models.Model):
@@ -117,19 +153,7 @@ class Comuna(models.Model):
         return self.nombre
 
 
-class Perfil_emprendedora(models.Model):
-    id_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_perfil_emprendedora = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=75)    
-    fecha_nacimiento = models.DateField()   
-    email = models.CharField(max_length=45)   
-    telefono = models.IntegerField()   
-    whatsapp = models.IntegerField()   
-    telegram = models.CharField(max_length=30)   
-    direccion = models.TextField(max_length=100)   
-    
-    def __str__(self):
-        return self.nombre 
+
 
 class Emprendimiento(models.Model):
     id_perfil_emprendedora = models.ForeignKey(Perfil_emprendedora, on_delete=models.CASCADE)
