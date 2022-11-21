@@ -38,14 +38,16 @@ LOGOUT_REDIRECT_URL = '/'
 INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
+    'crispy_forms',
+    'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.contenttypes',
+    'django.contrib.contenttypes',    
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'aplicaciones.apps.AplicacionesConfig',
-    'django.contrib.admin',
-    'crispy_forms',
+    
+    
     
 ]
 
@@ -156,12 +158,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # STATIC_ROOT = 'static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
  
 #Configuracion para agregar campos al usuario
 AUTH_USER_MODEL = 'aplicaciones.Usuario'
 
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 #descomentar static_root y comentar STATICFILES_DIRS para lanzar un collecttatic
 
 # Default primary key field type

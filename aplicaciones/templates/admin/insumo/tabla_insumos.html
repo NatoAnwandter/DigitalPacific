@@ -1,0 +1,84 @@
+
+{% extends '../../base.html' %}
+
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block body-style %}
+<body class="left-sidebar is-preload">
+    <div id="page-wrapper">
+{% endblock %}
+
+
+
+
+{% block contenido %}
+            
+    
+                </div>
+            </div>
+            
+        <!-- Main Wrapper -->
+            <div id="main-wrapper">
+                <div class="">
+                    <div class="inner">
+                        <div class="container">                           
+                            <div class="row">
+                                <div class="col-12 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar -->
+                                            
+                                            <section class="scrolled">
+                                                <header class="major">
+                                                    <h2>Lista de insumos registrados</h2>
+                                                </header>
+                                                <table class="table table-hover">
+                                                    <tr>
+                                                        <th><h6>N*</h6></th>
+                                                        <th><h6>Insumo</h6></th>
+                                                        <th><h6>Id</h6></th>                                                                                                        
+                                                        <th><h6>Producto</h6></th>                                                        
+                                                        <th><h6>Cantidad</h6></th>                                        
+                                                        <th><h6>Frecuencia</h6></th>                                        
+                                                    </tr>
+
+                                                    {% for e in insumos %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td>{{ e.nombre | title }}</td>
+                                                        <td>{{ e.id_insumo | title }}</td>
+                                                        <td>{{ e.id_producto | title }}</td>
+                                                        <td>{{ e.id_cantidad | title }}</td>                                                        
+                                                        <td>{{ e.id_frecuencia | title }}</td>                                                        
+                                                    </tr>
+                                                    {% endfor %}
+                                                </table>                                    
+                                            </section>                                           
+                                            
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12" >
+                                        <a href="/adminhome" class="button large icon solid fa-check-circle" >Volver</a>
+                                    </div>
+                                </div>
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+
+
+            
+
+    </div> -->
+    
+    
+{% endblock %}
+</body>
+
+
+

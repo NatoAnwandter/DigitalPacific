@@ -1,0 +1,77 @@
+
+{% extends '../../base.html' %}
+
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block body-style %}
+<body class="left-sidebar is-preload">
+    <div id="page-wrapper">
+{% endblock %}
+
+
+
+
+{% block contenido %}
+            
+    
+                </div>
+            </div>
+            
+        <!-- Main Wrapper -->
+            <div id="main-wrapper">
+                <div class="">
+                    <div class="inner">
+                        <div class="container">                           
+                            <div class="row">
+                                <div class="col-12 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar -->
+                                            
+                                            <section class="scrolled">
+                                                <header class="major">
+                                                    <h2>Lista de productos registrados</h2>
+                                                </header>
+                                                <table class="table table-hover">
+                                                    <tr>                                                        
+                                                        <th><h6>N*</h6></th>
+                                                        <th><h6>Producto</h6></th>                                                                                                                                                               
+                                                        <th><h6>Emprendimiento</h6></th>                                                        
+                                                        <th><h6>Incluye despacho</h6></th>                                        
+                                                    </tr>
+
+                                                    {% for e in productos %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td>{{ e.nombre | title }}</td>                                                        
+                                                        <td>{{ e.id_emprendimiento | title }}</td>
+                                                        <td>{{ e.id_despacho | title }}</td>                                                        
+                                                    </tr>
+                                                    {% endfor %}
+                                                </table>                                    
+                                            </section>                                           
+
+                                    </div>
+                                </div>
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+
+
+            
+
+    </div> -->
+    
+    
+{% endblock %}
+</body>
+
+
+

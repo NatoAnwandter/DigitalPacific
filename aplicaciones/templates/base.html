@@ -33,32 +33,48 @@
 						<!-- Header -->
 							<header id="header">
 								<div class="inner">
+									{% if user.is_authenticated %}
+										{% if user.is_staff %}
+									<!-- Logo -->
+										<h1 style="font-size: 22px;"><a href="/adminhome" id="logo">lista Emprendedora</a></h1>
 
+									<!-- Nav -->
+										<nav id="nav">	
+													<ul>
+														<li><a href="/t_emprendimiento">Lista Emprendimientos</a></li>
+														<li><a href="/t_producto">Lista Productos</a></li>
+														<li><a href="/t_insumo">Lista Insumos</a></li>
+														<li>
+															<a href="{% url 'logout' %}">cerrar sesión</a>
+														</li>
+														<li>
+															<a href="/admin">Hola @{{ user.username }}</a>
+														</li>													
+												
+											{% elif user.is_active %}
 									<!-- Logo -->
 										<h1><a href="/" id="logo">Emprendedora</a></h1>
 
 									<!-- Nav -->
-										<nav id="nav">
-											<ul>
-												<!-- <li class="current_page_item"><a href="/">Home</a></li>																				
-												<li class="current_page_item"><a href="#">Login</a></li> -->
-												<li><a href="/emprendimiento">Emprendimientos</a></li>
-												<li><a href="/producto">Productos</a></li>
-												<li><a href="/insumo">Insumos</a></li> 
-												{% if user.is_authenticated %}
-												<li>
-													<a href="{% url 'logout' %}">cerrar sesión</a>
-												</li>
-												<li>
-													<a href="#">@{{ user.username }}</a>
-												</li>
-												{% else %}
-												<li>
-													<a href="{% url 'login' %}">iniciar sesión</a>
-												</li>
-
+										<nav id="nav">	
+													<ul>													
+														<li><a href="/emprendimiento">Emprendimientos</a></li>
+														<li><a href="/producto">Productos</a></li>
+														<li><a href="/insumo">Insumos</a></li>																																						
+														<li>
+															<a href="{% url 'logout' %}">cerrar sesión</a>
+														</li>
+														<li>
+															<a href="#">@{{ user.username }}</a>
+														</li>
 												{% endif %}
-											</ul>
+											{% else %}
+														<li>
+															<a href="{% url 'login' %}">iniciar sesión</a>
+														</li>
+													
+										{% endif %}
+												</ul>
 										</nav>
 								</div>
 							</header>
@@ -118,6 +134,19 @@
 				</div>
 
 		</div>
+		<div id="contenido">
+			<!-- {% if messages %}
+				{% for m in messages %}
+				<script>
+					Swal.fire({
+						"title": "Felicitaciones", 
+						"text": "{{m}}",
+						"icon": "succes"
+					})					
+				</script>				
+				{% endfor %}
+			{% endif %} -->			
+		</div>
 
 	{% block js %}
 	{% endblock %} 
@@ -132,28 +161,30 @@
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="sweetalert2.all.min.js"></script>
 
-	{%  if messages %}
-		{% for m in messages %}		
-		<script>
-			p=document.getElementById("action");
-				let hoja = p.name;				
+	{% if messages %}
+	{% for m in messages %}		
+	<script>
+		p=document.getElementById("action");
+			let hoja = p.name;				
 
-			Swal.fire({
-                "title":"Desea ir a la siguiente página?",
-                "text": "O prefiere continuar agregando?",
-                "icon": "question",
-                "showCancelButton": true,				
-				"cancelButtonText": 'Continuaré acá!',
-				"confirmButtonText": 'Si, vámos!'
-            })
-            .then(function(result){
-                if(result.isConfirmed){
-                    window.location.href = hoja   
-                }
-            })			
-		</script>
-		{% endfor %}
-	{% endif %}
+		Swal.fire({
+			"title":"Desea ir a la siguiente página?",
+			"text": "O prefiere continuar agregando?",
+			"icon": "question",
+			"showCancelButton": true,				
+			"cancelButtonText": 'Continuaré acá!',
+			"confirmButtonText": 'Si, vámos!'
+		})
+		.then(function(result){
+			if(result.isConfirmed){
+				window.location.href = hoja   
+			}
+		})			
+	</script>
+	{% endfor %}
+{% endif %}
+
+
     <!-- ---------------------mensaje pop up ------------------------- -->
 	</body>
 </html>

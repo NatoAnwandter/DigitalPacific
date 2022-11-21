@@ -191,6 +191,17 @@
     
     {% endblock %}
     
+        {% if messages %}
+            {% for m in messages %}
+                <script>
+                    Swal.fire({
+                        "title": "Felicitaciones", 
+                        "text": "{{m}}",
+                        "icon": "succes"
+                    })					
+                </script>				
+            {% endfor %}
+        {% endif %}			
 
 </body>
 

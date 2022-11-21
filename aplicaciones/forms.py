@@ -1,6 +1,63 @@
 from django import forms
-from .models import Perfil_emprendedora, Emprendimiento, Producto, Insumo, Cantidad
+from .models import Perfil_emprendedora, Emprendimiento, Producto, Insumo, Cantidad, Usuario
+from django.contrib.auth.forms import UserCreationForm
 
+class UsuarioForm(forms.ModelForm):
+
+    username = forms.CharField(label='Nombre de usuario', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mb-2',
+            'placeholder': 'Ingrese su nombre de usuario',
+            'id': 'username'
+        }))
+
+    first_name = forms.CharField(label=' ingrese su nombre', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mb-2',
+            'placeholder': 'Ingrese su nombre de usuario',
+            'id': 'first_name'
+        }))
+
+    last_name = forms.CharField(label=' ingrese su apellido', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control mb-2',
+            'placeholder': 'Ingrese su nombre de usuario',
+            'id': 'last_name'
+        }))
+
+    email = forms.EmailField(label='correo electronico', widget=forms.EmailInput(attrs={
+        'class': 'form-control mb-2',
+        'placeholder': 'Ingrese su correo electronico',
+        'id': 'email'
+    }))
+
+    password = forms.CharField(label='Contraseña', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control mb-2',
+            'placeholder': 'Ingrese Contraseña',
+            'id': 'password'
+        }))
+
+    class Meta:
+        model = Usuario
+        fields = 'username', 'first_name', 'last_name', 'email', 'password'
+
+    def clean_password(self):
+        """ validacion de contraseña
+
+        metodo que valida la contraseña 
+        """
+        password = self.cleaned_data.get('password')
+        return password
+
+    def save(self, commit=True):
+        # guardar la informacion del registro en la variable user
+        user = super().save(commit=False)
+        # encriptar contraseña
+        user.set_password(self.cleaned_data['password'])
+        if commit:
+            user.save()
+        return user
 
 class Perfil_emprendedoraForm(forms.ModelForm):
     
@@ -78,4 +135,7 @@ class CantidadForm(forms.ModelForm):
         model = Cantidad
         fields = ["id_cantidad", "tipo", "cantidad"]    
 
-    
+class CustomUserCreationForm(UserCreationForm):
+    pass   
+
+

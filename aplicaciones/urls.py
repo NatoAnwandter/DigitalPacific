@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
-from .views import home, emprendimiento, producto, insumo, marketing, asesoria_contable, emprendedora, cantidad 
- 
+# from .views import home, emprendimiento, producto, insumo, marketing, asesoria_contable, emprendedora, cantidad, registro 
+from .views import *
 
 
 urlpatterns = [
@@ -15,7 +15,11 @@ urlpatterns = [
     path('emprendedora/', emprendedora, name = 'emprendedora'),
     path('cantidad/', cantidad, name = 'cantidad'),
     path('accounts/',include('django.contrib.auth.urls')),
-    
-    
-    
+    path('registro/', registro, name = 'registro'),
+        
+    path('adminhome/', adminhome, name = 'adminhome'),
+    path('t_emprendimiento/', t_emprendimiento, name = 't_emprendimiento'),
+    path('t_emprendedora/', t_emprendedora, name = 't_emprendedora'),
+    path('t_producto/', t_producto, name = 't_producto'),
+    path('t_insumo/', t_insumo, name = 't_insumo'),
 ]
