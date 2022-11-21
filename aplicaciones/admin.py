@@ -3,12 +3,18 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser 
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin 
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
+class ProductoResource(resources.ModelResource):
+    class Meta:
+        model = Producto
 
-class ProductoAdmin(admin.ModelAdmin):
+class ProductoAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display= ["nombre", "id_despacho"]
     search_fields = ["nombre"]
     list_filter = ["nombre", "id_despacho"]
+    resource_class = ProductoResource
 
 class InsumoAdmin(admin.ModelAdmin):
 #     # # list_display= ["productos"]
