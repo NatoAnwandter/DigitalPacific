@@ -15,17 +15,132 @@
 
 
 					<!-- Banner -->
+					{% if user.is_staff %}
+						<div id="banner">
+							<h2 class="col-12"><strong>Emprendedoras:</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+							built on HTML5 and CSS3 by <a href="http://html5up.net">HTML5 UP</a></h2>
+							<p>Does this statement make you want to click the big shiny button?</p>
+							<br>
+							<br>
+							<br>
+							<div class="container" >
+								<div class="row ">
+									<!-- <div class="col-lg-4 col-md-6 col-sm-12">
+										<a href="/emprendedora" class="button large icon solid fa-check-circle" style="display:none;">Registrarse</a>
+									</div> -->
+									<div class="col-lg-4 col-md-6 col-sm-12" >
+										<a href="#" class="button large icon solid fa-check-circle" >Reportes</a>
+									</div>					
+									<div class="col-lg-4 col-md-6 col-sm-12" >
+										<a href="#" class="button large icon solid fa-check-circle" >Análisis</a>
+									</div>
+									
+									<div class="col-lg-4 col-md-6 col-sm-12" >
+										<a href="#" class="button large icon solid fa-check-circle" >Otros</a>
+									</div>								
+								</div>
+							</div>
+							
+									
+							
+						</div>
+						{% else %}
 						<div id="banner">
 							<h2><strong>Emprendedora:</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
 							built on HTML5 and CSS3 by <a href="http://html5up.net">HTML5 UP</a></h2>
 							<p>Does this statement make you want to click the big shiny button?</p>
 							<a href="/emprendedora" class="button large icon solid fa-check-circle " style="display:none;">Registrarse</a>
 						</div>
+					{% endif %}
 
 					</div>
 				</div>
 				
 			<!-- Main Wrapper -->
+			{% if user.is_staff %}				
+				<div id="main-wrapper">
+					<div class="wrapper style1">
+						<div class="inner">
+
+							<!-- Feature 1 -->
+								<section class="container box feature1">
+									<div class="row">										
+										<div class="col-12 col-12-medium">
+
+										<!-- ------------ tabla emprendedoras --------------------- -->
+										<section class="scrolled">
+											<header class="major">
+												<h2>Nuestras emprendedoras</h2>
+											</header>
+											<table class="table table-hover">
+												<tr>
+													<th><h6>N*</h6></th>
+													<th><h6>Nombre</h6></th>
+													<!-- <th><h6>Id</h6></th>                                                         -->
+													<th><h6>Fecha de nacim.</h6></th>                                                        
+													<th><h6>Teléfono</h6></th>                                                        
+													<th><h6>Whatsapp</h6></th>                                                        
+													<th><h6>Télegram</h6></th>                                                        
+													<th><h6>Dirección</h6></th>                                                        
+												</tr>
+												
+												{% for e in emprendedoras %}												
+												<tr>													
+													<td>{{ forloop.counter }}</td>
+													<td>{{ e.id_user | title }}</td>
+													<!-- <td>{{ e.id_perfl_emprendedora | title }}</td> -->
+													<td>{{ e.fecha_nacimiento | date:"d/m/Y"}}</td>
+													<td>{{ e.telefono | title }}</td>
+													<td>{{ e.whatsapp | title }}</td>
+													<td>{{ e.telegram | title }}</td>
+													<td>{{ e.direccion | title }}</td>
+												</tr>
+												{% endfor %}
+											</table>                                    
+										</section>	
+										</div>										
+									</div>
+								</section>
+
+						</div>
+					</div>
+					
+					<div class="wrapper style3">
+						<div class="inner">
+							<div class="container">
+								<div class="row">
+									<div class="col-8 col-12-medium">
+
+										<!-- Article list -->
+											<section class="box article-list">
+												<h2 class="icon fa-file-alt">Recent Posts</h2>
+
+												<!-- Excerpt -->
+													<article class="box excerpt">
+														<a href="#" class="image left"><img src="{% static 'images/pic04.jpg' %}" alt="" /></a>
+														<div>
+															<header>
+																<span class="date">July 24</span>
+																<h3><a href="#">Repairing a hyperspace window</a></h3>
+															</header>
+															<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus
+															semper mod quisturpis nisi consequat etiam lorem. Phasellus quam turpis,
+															feugiat et sit amet ornare in, hendrerit in lectus semper mod quis eget mi dolore.</p>
+														</div>
+													</article>
+
+												
+												
+
+											</section>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% else %}
 				<div id="main-wrapper">
 					<div class="wrapper style1">
 						<div class="inner">
@@ -160,7 +275,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>				
+			{% endif %}
 
 
         {% block js %}

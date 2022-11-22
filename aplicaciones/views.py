@@ -146,34 +146,38 @@ def registro(request):
             login(request,  user)
             # messages.success(request, "creado correctamente!")
             data["mensaje"] = "creado correctamente!"
-            #redirigir al home
-            if user.is_staff():
-                return redirect(to="adminhome")
-            if user.is_active():
-                return redirect(to="home")
+            #redirigir al home            
+               
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
 
 # --------------------------------------------------------------------------------------------------------------------------------------------
 
-def adminhome(request): 
-    emprendedoras = Perfil_emprendedora.objects.all()
-    data = {
-        'emprendedoras': emprendedoras
-    }
-    return render(request,'admin/adminhome.html', data)
+def access_denied(request): 
+    return render(request,'admin/access_denied.html')
+    
 
 def t_emprendimiento(request): 
-    return render(request,'admin/emprendimiento/tabla_emprendimientos.html')
+    if request.user.is_staff:
 
-def t_emprendedora(request): 
-    return render(request,'admin/emprendedora/tabla_emprendedoras.html')
+        return render(request,'admin/emprendimiento/tabla_emprendimientos.html')
+    else:
+        return render(request,'admin/access_denied.html')
 
 def t_producto(request): 
-    return render(request,'admin/producto/tabla_productos.html')
+    if request.user.is_staff:
+
+        return render(request,'admin/producto/tabla_productos.html')
+    else:
+        return render(request,'admin/access_denied.html')
 
 def t_insumo(request): 
-    return render(request,'admin/insumo/tabla_insumos.html')
+    if request.user.is_staff:
+
+        return render(request,'admin/insumo/tabla_insumos.html')
+    else:
+        return render(request,'admin/access_denied.html')
+    
 
 
 

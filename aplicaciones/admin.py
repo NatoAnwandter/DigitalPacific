@@ -20,6 +20,10 @@ class InsumoAdmin(admin.ModelAdmin):
 #     # # list_display= ["productos"]
     search_fields = ["nombre"]
 
+
+
+
+
 # Register your models here.
 admin.site.register(Perfil_emprendedora)
 admin.site.register(Emprendimiento)

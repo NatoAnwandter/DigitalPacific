@@ -17,9 +17,8 @@ urlpatterns = [
     path('accounts/',include('django.contrib.auth.urls')),
     path('registro/', registro, name = 'registro'),
         
-    path('adminhome/', adminhome, name = 'adminhome'),
+    path('access_denied/', access_denied, name = 'access_denied'),
     path('t_emprendimiento/', t_emprendimiento, name = 't_emprendimiento'),
-    path('t_emprendedora/', t_emprendedora, name = 't_emprendedora'),
     path('t_producto/', t_producto, name = 't_producto'),
     path('t_insumo/', t_insumo, name = 't_insumo'),
 ]

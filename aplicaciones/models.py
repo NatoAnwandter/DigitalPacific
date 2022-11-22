@@ -6,14 +6,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 
 class Tipo_usuario(models.Model):   
-    ACCESOS=(('Administrador','Administrador'),
-            ('Consultor','Consultor'),
-            ('Emprendedor','Emprendedor')) 
-    tipo = models.CharField(choices=ACCESOS, max_length=200)
+    id_tipo_usuario = models.AutoField(primary_key=True) 
+    nombre = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=500)
 
     def __str__(self):
-        return self.tipo
+        return self.nombre
+
+
+
+        
 # -----------------------------------------------------AGREGAR CAMPOS A AUTH USER ADMIN DJANGO ----------------------------------------------
 class Usuario(AbstractUser):
     tipo_usuario=models.ForeignKey(Tipo_usuario, on_delete = models.CASCADE, null=True)
@@ -168,7 +170,6 @@ class Emprendimiento(models.Model):
     
     def __str__(self):
         return self.nombre
-
 
 
 class Producto(models.Model):

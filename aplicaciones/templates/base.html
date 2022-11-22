@@ -36,44 +36,44 @@
 									{% if user.is_authenticated %}
 										{% if user.is_staff %}
 									<!-- Logo -->
-										<h1 style="font-size: 22px;"><a href="/adminhome" id="logo">Emprendedoras</a></h1>
+										<h1 style="font-size: 22px;"><a href="/" id="logo">Emprendedoras</a></h1>
 
 									<!-- Nav -->
 										<nav id="nav">	
-													<ul>
-														<li><a href="/t_emprendimiento">Emprendimientos</a></li>
-														<li><a href="/t_producto">Productos</a></li>
-														<li><a href="/t_insumo">Insumos</a></li>
-														<li>
-															<a href="{% url 'logout' %}">cerrar sesión</a>
-														</li>
-														<li>
-															<a href="/admin">Hola @{{ user.username }}</a>
-														</li>													
+											<ul>
+												<li><a href="/t_emprendimiento">Emprendimientos</a></li>
+												<li><a href="/t_producto">Productos</a></li>
+												<li><a href="/t_insumo">Insumos</a></li>
+												<li>
+													<a href="{% url 'logout' %}">cerrar sesión</a>
+												</li>
+												<li>
+													<a href="/admin">Hola @{{ user.username }}</a>
+												</li>													
 												
-											{% elif user.is_active %}
+										{% elif user.is_active %}
 									<!-- Logo -->
 										<h1><a href="/" id="logo">Emprendedora</a></h1>
 
 									<!-- Nav -->
 										<nav id="nav">	
-													<ul>													
-														<li><a href="/emprendimiento">Emprendimientos</a></li>
-														<li><a href="/producto">Productos</a></li>
-														<li><a href="/insumo">Insumos</a></li>																																						
-														<li>
-															<a href="{% url 'logout' %}">cerrar sesión</a>
-														</li>
-														<li>
-															<a href="#">@{{ user.username }}</a>
-														</li>
-												{% endif %}
-											{% else %}
-														<li>
-															<h1 style="font-size: 22px;"><a href="{% url 'login' %}">iniciar sesión</a></h1>
-														</li>
-													
+											<ul>													
+												<li><a href="/emprendimiento">Emprendimientos</a></li>
+												<li><a href="/producto">Productos</a></li>
+												<li><a href="/insumo">Insumos</a></li>																																						
+												<li>
+													<a href="{% url 'logout' %}">cerrar sesión</a>
+												</li>
+												<li>
+													<a href="#">Hola @{{ user.username }}</a>
+												</li>
 										{% endif %}
+									{% else %}
+												<li>
+													<h1 style="font-size: 22px;"><a href="{% url 'login' %}">iniciar sesión</a></h1>
+												</li>
+													
+									{% endif %}
 												</ul>
 										</nav>
 								</div>
@@ -157,33 +157,8 @@
 	<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
 	<script src="{% static 'assets/js/util.js' %}"></script>
 	<script src="{% static 'assets/js/main.js' %}"></script>
-	<!-- ---------------------mensaje pop up ------------------------- -->
-	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="sweetalert2.all.min.js"></script>
-
-	{% if messages %}
-	{% for m in messages %}		
-	<script>
-		p=document.getElementById("action");
-			let hoja = p.name;				
-
-		Swal.fire({
-			"title":"Desea ir a la siguiente página?",
-			"text": "O prefiere continuar agregando?",
-			"icon": "question",
-			"showCancelButton": true,				
-			"cancelButtonText": 'Continuaré acá!',
-			"confirmButtonText": 'Si, vámos!'
-		})
-		.then(function(result){
-			if(result.isConfirmed){
-				window.location.href = hoja   
-			}
-		})			
-	</script>
-	{% endfor %}
-{% endif %}
-
+	<!-- -----------mensaje pop up sweet alert siguiente hoja-------------- -->
+	
 
     <!-- ---------------------mensaje pop up ------------------------- -->
 	</body>

@@ -169,30 +169,30 @@
     <!-- {% block sigte_pagina %}
     {% endblock %}     -->
     ----------------------------------------SWEET ALERT---------------------------------
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="sweetalert2.all.min.js"></script>
-        {% if messages %}
-            {% for m in messages %}	
-                <script >
-                    p=document.getElementById("action");
-                    let hoja = p.name;				
-    
-                    Swal.fire({
-                        "title":"Desea ir a la siguiente página?",
-                        "text": "O prefiere continuar agregando?",
-                        "icon": "question",
-                        "showCancelButton": true,				
-                        "cancelButtonText": 'Continuaré acá!',
-                        "confirmButtonText": 'Si, vámos!'
-                    })
-                    .then(function(result){
-                        if(result.isConfirmed){
-                            window.location.href = hoja   
-                        }
-                    })			
-                </script>
-            {% endfor %}
-        {% endif %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    {% if messages %}
+        {% for m in messages %}	
+            <script >
+                p=document.getElementById("action");
+                let hoja = p.name;				
+
+                Swal.fire({
+                    "title":"Desea ir a la siguiente página?",
+                    "text": "O prefiere continuar agregando?",
+                    "icon": "question",
+                    "showCancelButton": true,				
+                    "cancelButtonText": 'Continuaré acá!',
+                    "confirmButtonText": 'Si, vámos!'
+                })
+                .then(function(result){
+                    if(result.isConfirmed){
+                        window.location.href = hoja   
+                    }
+                })			
+            </script>
+        {% endfor %}
+    {% endif %}
     -------------------------------SWEET ALERT-------------------------------------------
     
 {% endblock %}

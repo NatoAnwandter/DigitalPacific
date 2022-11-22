@@ -48,8 +48,6 @@ INSTALLED_APPS = [
     'aplicaciones.apps.AplicacionesConfig',
     'import_export',
     
-    
-    
 ]
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
