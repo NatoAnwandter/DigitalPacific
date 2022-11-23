@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect
 from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm, InsumoForm, CantidadForm, UsuarioForm
-from .models import Emprendimiento ,Producto, Insumo, Cantidad, Perfil_emprendedora
+from .models import Emprendimiento ,Producto, Insumo, Cantidad, Perfil_emprendedora, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from urllib import request
+# from user.models import Usuario
 
 
 def home(request): 
@@ -13,9 +14,15 @@ def home(request):
 
 def emprendimiento(request):
     if request.user.is_authenticated:
-
-        # emprendimiento = Emprendimiento.objects.filter(usuario=request.user)
         emprendimientos = Emprendimiento.objects.all()
+        emprendedora = Perfil_emprendedora.objects.values_list("id_perfil_emprendedora").filter(id_user=request.user.id)
+
+        emprendimiento = Emprendimiento.objects.filter(id_perfil_emprendedora_id = emprendedora[0])
+
+        print("este es el emprendedora:",emprendedora[0])
+        print("este es el user.id:",request.user.id)
+
+
         data = {
             'form':EmprendimientoForm(),
             'emprendimientos': emprendimientos, #admin
@@ -25,6 +32,15 @@ def emprendimiento(request):
         if request.method == 'POST':
             formulario = EmprendimientoForm(data=request.POST)
             if formulario.is_valid():
+                post = formulario.save(commit=False)                                
+                post.id_perfil_emprendedora_id = emprendedora
+                post.id_comuna_id = request.POST["id_comuna"]
+                post.id_industria_id = request.POST["id_industria"]                
+                post.nombre = request.POST["nombre"]
+                post.email = request.POST["email"]
+                post.website = request.POST["website"]
+                post.id_marketing_id = request.POST["id_marketing"]
+                post.id_asesoria_contable_id = request.POST["id_asesoria_contable"]
                 formulario.save()           
 
                 messages.success(request, "#")
@@ -38,43 +54,70 @@ def emprendimiento(request):
 
 
 def producto(request):
-    productos = Producto.objects.all()
+    if request.user.is_authenticated:
 
-    data = {
-        'form':ProductoForm(),
-        'productos': productos
-    }
+        productos = Producto.objects.all()
+        producto = Producto.objects.filter(id_user=request.user.id)
+        print(producto)
 
-    if request.method == 'POST':
-        formulario = ProductoForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
+        data = {
+            'form':ProductoForm(),
+            'productos': productos,
+            'producto': producto
+        }
 
-            messages.success(request, "#")
-            # data["mensaje"] = "producto guardado"          
-        else:
-            data["mensaje"] = formulario
+        if request.method == 'POST':
+            formulario = ProductoForm(data=request.POST)
+            if formulario.is_valid():
+                
+                post = formulario.save(commit=False)                                
+                post.id_emprendimiento_id = request.POST["id_emprendimiento"]                
+                post.nombre = request.POST["nombre"]
+                post.id_despacho_id = request.POST["id_despacho"]
+                post.id_user_id = request.user.id
+                formulario.save()
 
-    return render(request,'app/emprendimiento/producto/agregar_producto.html', data)
+                messages.success(request, "#")
+                # data["mensaje"] = "producto guardado"          
+            else:
+                data["mensaje"] = formulario
+
+        return render(request,'app/emprendimiento/producto/agregar_producto.html', data)
+    else:    
+        return render(request,'app/emprendimiento/producto/agregar_producto.html')
 
 
 def insumo(request):
-    insumos = Insumo.objects.all()
+    if request.user.is_authenticated:
 
-    data = {
-        'form':InsumoForm(),
-        'insumos': insumos
-    }
+        insumos = Insumo.objects.all()
+        insumo = Insumo.objects.filter(id_user=request.user.id)
+        print(insumo)
 
-    if request.method == 'POST':
-        formulario = InsumoForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            data["mensaje"] = "insumo guardado"          
-        else:
-            data["mensaje"] = formulario
+        data = {
+            'form':InsumoForm(),
+            # 'registros':registros,
+            'insumos': insumos,
+            'insumo': insumo
+        }
 
-    return render(request,'app/emprendimiento/producto/insumo/agregar_insumo.html',data)
+        if request.method == 'POST':
+            formulario = InsumoForm(data=request.POST)
+            if formulario.is_valid():
+                post = formulario.save(commit=False)
+                post.nombre = request.POST["nombre"]                
+                post.id_producto_id = request.POST["id_producto"]
+                post.id_cantidad_id = request.POST["id_cantidad"]
+                post.id_frecuencia_id = request.POST["id_frecuencia"]
+                post.id_user_id = request.user.id
+                formulario.save()
+                data["mensaje"] = "insumo guardado"          
+            else:
+                data["mensaje"] = formulario
+
+        return render(request,'app/emprendimiento/producto/insumo/agregar_insumo.html',data)
+    else:    
+        return render(request,'app/emprendimiento/producto/insumo/agregar_insumo.html')
 
 
 def marketing(request):
@@ -147,7 +190,6 @@ def registro(request):
             # messages.success(request, "creado correctamente!")
             data["mensaje"] = "creado correctamente!"
             #redirigir al home            
-               
         data["form"] = formulario
     return render(request, 'registration/registro.html', data)
 

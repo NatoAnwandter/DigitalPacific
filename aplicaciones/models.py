@@ -15,11 +15,11 @@ class Tipo_usuario(models.Model):
 
 
 
-        
+
 # -----------------------------------------------------AGREGAR CAMPOS A AUTH USER ADMIN DJANGO ----------------------------------------------
 class Usuario(AbstractUser):
-    tipo_usuario=models.ForeignKey(Tipo_usuario, on_delete = models.CASCADE, null=True)
-    
+    tipo_usuario=models.ForeignKey(Tipo_usuario, on_delete = models.CASCADE, null=True) 
+
     def __str__(self):
         return self.username
 
@@ -28,6 +28,7 @@ class Usuario(AbstractUser):
 
     def has_module_perms(self, app_label):
         return True   
+# -----------------------------------------------------AGREGAR CAMPOS A AUTH USER ADMIN DJANGO ----------------------------------------------
 
 class Perfil_emprendedora(models.Model):
     id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -173,6 +174,7 @@ class Emprendimiento(models.Model):
 
 
 class Producto(models.Model):
+    id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
     id_producto = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
@@ -182,11 +184,13 @@ class Producto(models.Model):
         return self.nombre
 
 class Insumo(models.Model):
+    id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     id_insumo = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
     id_cantidad = models.ForeignKey(Cantidad, on_delete=models.SET_NULL, blank=True, null=True )
-    id_frecuencia = models.ForeignKey(Frecuencia, on_delete=models.SET_NULL, blank=True, null=True )
+    id_frecuencia = models.ForeignKey(Frecuencia, on_delete=models.SET_NULL, blank=True, null=True)
+    
     
     def __str__(self):
         return self.nombre

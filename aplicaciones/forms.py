@@ -1,6 +1,9 @@
 from django import forms
 from .models import Perfil_emprendedora, Emprendimiento, Producto, Insumo, Cantidad, Usuario
 from django.contrib.auth.forms import UserCreationForm
+from dataclasses import field, fields
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
+
 
 class UsuarioForm(forms.ModelForm):
 
@@ -59,6 +62,47 @@ class UsuarioForm(forms.ModelForm):
             user.save()
         return user
 
+# Form para crear usuario por vista admin django
+
+
+class AdminFormaCreacionUsuario(forms.ModelForm):
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Confirmar contraseña', widget=forms.PasswordInput)
+
+    class Meta:
+        model = Usuario
+        fields = ('username', 'first_name', 'last_name',
+                'email', 'password')
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Las contraseñas no coinciden")
+
+        return password2
+
+    def save(self, commit=True):
+        usuario = super(AdminFormaCreacionUsuario, self).save(commit=False)
+        usuario.set_password(self.cleaned_data["password1"])
+        if commit:
+            usuario.save()
+        return usuario
+
+class AdminFormaActualizar(forms.ModelForm):
+    # variable para que el admin solo pueda ver la contraseña
+    password = ReadOnlyPasswordHashField()
+
+    class Meta:
+        model = Usuario
+        fields = ('username', 'first_name', 'last_name',
+                'email', 'password', 'password')
+
+    def clean_password(self):
+        return self.initial['password']
+# -----------------------------------------------ADMIN--------------------------------
+
 class Perfil_emprendedoraForm(forms.ModelForm):
     
     class Meta:
@@ -70,7 +114,6 @@ class Perfil_emprendedoraForm(forms.ModelForm):
         require_css_class = 'required-field'
         
         widgets = {        
-        # "fecha_nacimiento": forms.SelectDateWidget(years=range(1955, 2007), ),
         "fecha_nacimiento": forms.DateInput(attrs={'type': 'date'}),
         "direccion" : forms.Textarea(attrs={"rows":3})                
         }
@@ -85,7 +128,7 @@ class EmprendimientoForm(forms.ModelForm):
     
     class Meta:
         model = Emprendimiento
-        fields = ["id_perfil_emprendedora", "id_comuna", "id_industria", "id_emprendimiento", "nombre", "email", "website", "id_marketing", "id_asesoria_contable"]
+        fields = "id_comuna", "id_industria", "nombre", "email", "website", "id_marketing", "id_asesoria_contable"
         
         error_css_class = 'error-field'
         require_css_class = 'required-field'
@@ -94,7 +137,6 @@ class EmprendimientoForm(forms.ModelForm):
         super().__init__(*args, **kwards)
         # self.fields['email'].widget.attrs.update({'class': 'form-control-2'})
         self.fields['nombre'].label = 'nombre del emprendimiento'
-        self.fields['id_perfil_emprendedora'].label = 'emprendedora'
         self.fields['id_comuna'].label = 'comuna'
         self.fields['id_industria'].label = 'industria'
         self.fields['id_marketing'].label = 'incluye marketing'
@@ -106,7 +148,7 @@ class ProductoForm(forms.ModelForm):
 
     class Meta:
         model = Producto
-        fields = ["id_emprendimiento", "id_producto", "nombre", "id_despacho"]
+        fields = "id_emprendimiento", "nombre", "id_despacho"
         # fields = '__all__'
 
     def __init__(self,*args, **kwards):
@@ -120,7 +162,7 @@ class InsumoForm(forms.ModelForm):
 
     class Meta:      
         model = Insumo
-        fields = ["id_producto", "id_insumo", "nombre", "id_cantidad", "id_frecuencia"]
+        fields = "id_producto", "nombre", "id_cantidad", "id_frecuencia"
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)
