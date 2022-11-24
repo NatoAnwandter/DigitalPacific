@@ -57,10 +57,14 @@
 				</div>
 				
 			<!-- Main Wrapper -->
-			{% if user.is_staff %}				
-				<div id="main-wrapper">
-					<div class="wrapper style1">
+			{% if user.is_staff %}						
+				<div id="main-wrapper">					
+					<div class="wrapper style1 pt-1">
+						<footer style="padding-left:50px;">
+							<a href="/agregar_emprendedora" class="button icon solid fa-info-circle">Registrar</a>
+						</footer>	
 						<div class="inner">
+							
 
 							<!-- Feature 1 -->
 								<section class="container box feature1">
@@ -75,8 +79,7 @@
 											<table class="table table-hover">
 												<tr>
 													<th><h6>N*</h6></th>
-													<th><h6>Nombre</h6></th>
-													<!-- <th><h6>Id</h6></th>                                                         -->
+													<th><h6>Nombre</h6></th>                                                        
 													<th><h6>Fecha de nacim.</h6></th>                                                        
 													<th><h6>Teléfono</h6></th>                                                        
 													<th><h6>Whatsapp</h6></th>                                                        
@@ -88,7 +91,6 @@
 												<tr>													
 													<td>{{ forloop.counter }}</td>
 													<td>{{ e.id_user | title }}</td>
-													<!-- <td>{{ e.id_perfl_emprendedora | title }}</td> -->
 													<td>{{ e.fecha_nacimiento | date:"d/m/Y"}}</td>
 													<td>{{ e.telefono | title }}</td>
 													<td>{{ e.whatsapp | title }}</td>

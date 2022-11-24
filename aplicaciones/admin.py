@@ -33,7 +33,7 @@ class UserAdmin(BaseUserAdmin, ImportExportModelAdmin):
     list_filter = ('email',)
     fieldsets = (
         (None,{'fields': ('username','password', 'tipo_usuario')}),
-        ('Informacion personal', {'fields': ( 'first_name', 'last_name')}),
+        ('Informacion personal', {'fields': ( 'first_name', 'last_name', 'email')}),
         ('Permisos Django', {'fields': ('is_staff', 'is_active')})
     )
 

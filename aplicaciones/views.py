@@ -10,7 +10,13 @@ from urllib import request
 
 
 def home(request): 
-    return render(request,'home.html')
+    emprendedoras = Perfil_emprendedora.objects.all()
+    
+    data = {
+        'emprendedoras': emprendedoras 
+    }
+
+    return render(request,'home.html', data)
 
 def emprendimiento(request):
     if request.user.is_authenticated:
@@ -132,28 +138,30 @@ def asesoria_contable(request):
 
 # ****************------------FORMS Emprendedora------------*******************
 
-def emprendedora(request):
-    
+def agregar_emprendedora(request):
+    emprendedoras = Perfil_emprendedora.objects.all()
+
     data = {
-        'form': Perfil_emprendedoraForm(), 
+        'form':Perfil_emprendedoraForm(),
         'emprendedoras': emprendedoras
-        
     }
+    print(emprendedoras)
 
     if request.method == 'POST':
         formulario = Perfil_emprendedoraForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            
-            # messages.success(request, "Felicitaciones")
-            data["mensaje"] = "perfil_emprendedora guardado"
-            # aca poner funcion redirect to emprendimiento    --------------------------------
-            return redirect(to='emprendimiento')
-            
+        
+            messages.success(request, "Felicitaciones")
+            # data["mensaje"] = "perfil_emprendedora guardado" 
+            #return redirect(to='emprendimiento')       
         else:
             data["mensaje"] = formulario
 
-    return render(request,'app/emprendedora/agregar_emprendedora.html', data)
+    # return render(request,'',data)
+    return render(request,'admin/emprendedora/agregar_emprendedora.html',data)
+
+# -------------------------------------------------------------------------------    
 
 
 def cantidad(request):
@@ -196,27 +204,43 @@ def registro(request):
 # --------------------------------------------------------------------------------------------------------------------------------------------
 
 def access_denied(request): 
+
     return render(request,'admin/access_denied.html')
     
 
 def t_emprendimiento(request): 
     if request.user.is_staff:
+        emprendimientos = Emprendimiento.objects.all()
+            
+        data = {
+            'emprendimientos': emprendimientos 
+        }
 
-        return render(request,'admin/emprendimiento/tabla_emprendimientos.html')
+        return render(request,'admin/emprendimiento/tabla_emprendimientos.html', data)
     else:
         return render(request,'admin/access_denied.html')
 
 def t_producto(request): 
     if request.user.is_staff:
+        productos = Producto.objects.all()
+            
+        data = {
+            'productos': productos 
+        }
 
-        return render(request,'admin/producto/tabla_productos.html')
+        return render(request,'admin/producto/tabla_productos.html', data)
     else:
         return render(request,'admin/access_denied.html')
 
 def t_insumo(request): 
     if request.user.is_staff:
+        insumos = Insumo.objects.all()
+            
+        data = {
+            'insumos': insumos 
+        }
 
-        return render(request,'admin/insumo/tabla_insumos.html')
+        return render(request,'admin/insumo/tabla_insumos.html', data)
     else:
         return render(request,'admin/access_denied.html')
     

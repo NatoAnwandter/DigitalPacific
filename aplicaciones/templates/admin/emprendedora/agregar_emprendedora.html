@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block css %}
+<!-- <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+<link rel="stylesheet" href="{% static 'admin/css/widget.css' %}"> -->
+{% endblock %}
+
+{% block body-style %}
+    <body class="left-sidebar is-preload">
+        <div id="page-wrapper">
+{% endblock %}
+
+{% block contenido %}
+                </div>
+            </div>
+        <!-- Main Wrapper -->
+            <div id="main-wrapper">
+                <div class="wrapper style2">
+                    <div class="inner">
+                        
+                        <div class="container">
+                            <header class="major mb-0">
+                                <h2>Registra a una emprendedora</h2>
+                            </header> 
+                            <div class="row">                                
+                                <div class="col-4 col-12-medium pb-0">
+                                    <div id="sidebar">                                       
+
+                                            <!-- Feature 1 -->
+                                        <section class="container box feature1">
+                                            <div class="row">										
+                                                <div class="col-12 col-12-medium pb-0">
+
+                                                <!-- ------------ tabla emprendedoras --------------------- -->
+                                                <section class="scrolled">
+                                                    <header class="major">
+                                                        <h2>Nuestras emprendedoras</h2>
+                                                    </header>
+                                                    <table class="table table-hover">
+                                                        <tr>
+                                                            <th><h6>N2*</h6></th>
+                                                            <th><h6>Nombre</h6></th>                                                          
+                                                            <th><h6>Teléfono</h6></th>                                                        
+                                                        </tr>
+                                                        
+                                                        {% for e in emprendedoras %}												
+                                                        <tr>													
+                                                            <td>{{ forloop.counter }}</td>
+                                                            <td>{{ e.id_user | title }}</td>													
+                                                            <td>{{ e.telefono | title }}</td>
+                                                            
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </table>                                    
+                                                </section>	
+                                                </div>										
+                                            </div>
+                                        </section>
+
+                                    </div>
+                                </div>
+                                <div class="col-8 col-12-medium imp-medium">
+                                    <div id="content">
+
+                                        <!-- Content -->
+                                        <div id="modal-envolver">
+                                            {% load crispy_forms_tags %} 
+                                            
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <form action="" class="" method="post" id="">
+                                            
+                                                            {%  csrf_token %}
+                                            
+                                                            <!-- filtro  de form a crispy -->
+                                                            {{ form | crispy }} 
+                                            
+                                                            <br>
+                                                            <div class="d-flex justify-content-end">
+                                                                <button type="reset" class="btn btn-secondary">Cancelar</button>
+                                                                &nbsp;
+                                                                <button type="submit" id="btnEnviar" class="btn btn-primary">Registrar</button>
+                                                            </div >
+                                                            
+                                                            <div class="modal-dialog">
+                                                        </form>
+                                                        {{ mensaje }}   
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table id="tablaemprendedoras"></table>
+                                            
+                                            </table>
+                                            
+                                                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper style3">
+                    <div class="inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-8 col-12-medium">
+
+                                    <!-- Article list -->
+                                        <section class="box article-list">
+                                            <h2 class="icon fa-file-alt">Recent Posts</h2>
+
+                                            <!-- Excerpt -->
+                                                <article class="box excerpt">
+                                                    <a href="#" class="image left"><img src="{% static 'images/pic11.jpg' %}" alt="" /></a>
+                                                    <div>
+                                                        <header>
+                                                            <span class="date">30 de agosto de 2022</span>
+                                                            <h3><a href="#">Repairing a hyperspace window</a></h3>
+                                                        </header>
+                                                        <p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus
+                                                        semper mod quisturpis nisi consequat etiam lorem. Phasellus quam turpis,
+                                                        feugiat et sit amet ornare in, hendrerit in lectus semper mod quis eget mi dolore.</p>
+                                                    </div>
+                                                </article>
+                                        </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    {% block js %}
+    
+    {% endblock %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    
+        {% if messages %}
+            {% for m in messages %}
+                <script>
+                    Swal.fire({
+                        "title": "Registrado satisfactoriamente!!", 
+                        "text": "{{m}}",
+                        "icon": "success"
+                    })					
+                </script>				
+            {% endfor %}
+        {% endif %}			
+
+</body>
+
+
+{% endblock %}

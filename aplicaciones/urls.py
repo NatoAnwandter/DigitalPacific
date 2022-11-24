@@ -12,12 +12,12 @@ urlpatterns = [
     path('insumo/', insumo, name = 'insumo'),
     path('marketing/', marketing, name = 'producto'),
     path('asesoria_contable/', asesoria_contable, name = 'asesoria_contable'),
-    path('emprendedora/', emprendedora, name = 'emprendedora'),
     path('cantidad/', cantidad, name = 'cantidad'),
     path('accounts/',include('django.contrib.auth.urls')),
     path('registro/', registro, name = 'registro'),
-        
+# -----------------------------ADMIN--------------------------------        
     path('access_denied/', access_denied, name = 'access_denied'),
+    path('agregar_emprendedora/', agregar_emprendedora, name = 'agregar_emprendedora'),
     path('t_emprendimiento/', t_emprendimiento, name = 't_emprendimiento'),
     path('t_producto/', t_producto, name = 't_producto'),
     path('t_insumo/', t_insumo, name = 't_insumo'),
