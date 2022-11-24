@@ -38,6 +38,7 @@
                                                 <table class="table table-hover">
                                                     <tr>                                                        
                                                         <th><h6>N*</h6></th>
+                                                        <th><h6>Emprendedora</h6></th>
                                                         <th><h6>Producto</h6></th>                                                                                                                                                               
                                                         <th><h6>Emprendimiento</h6></th>                                                        
                                                         <th><h6>Incluye despacho</h6></th>                                        
@@ -46,6 +47,7 @@
                                                     {% for e in productos %}
                                                     <tr>
                                                         <td>{{ forloop.counter }}</td>
+                                                        <td>{{ e.id_user | title }}</td>                                                        
                                                         <td>{{ e.nombre | title }}</td>                                                        
                                                         <td>{{ e.id_emprendimiento | title }}</td>
                                                         <td>{{ e.id_despacho | title }}</td>                                                        
