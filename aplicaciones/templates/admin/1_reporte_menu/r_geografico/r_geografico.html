@@ -1,0 +1,181 @@
+
+{% extends '../../../base.html' %}
+
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block body-style %}
+<body class="left-sidebar is-preload">
+    <div id="page-wrapper">
+{% endblock %}
+
+
+
+
+{% block contenido %}
+            
+    
+                </div>
+            </div>
+            
+        <!-- Main Wrapper -->
+            <div id="main-wrapper">
+                <div class="">
+                    <div class="inner">
+                        <div class="container">                           
+                            <div class="row">
+                                <div class="col-6 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar reporte -->
+                                            
+                                            <section >
+                                                <header class="major">
+                                                    <h2>Reporte de emprendedoras</h2>
+                                                </header>
+                                                <div class="scrolled">
+                                                    <table class="table table-hover">
+                                                        <tr>
+                                                            <th><h6>N*</h6></th>
+                                                            <th><h6>Comuna </h6></th>
+                                                            <th><h6>Total Emprendedoras </h6></th>                                                                       
+                                                        </tr>                                           
+                                                        
+                                                        {% for f in emprendedora_count %}
+                                                        <tr>
+                                                            <td>{{ forloop.counter }}</td>
+                                                            <td>{{ f.comuna }}</td>
+                                                            <td>{{ f.comuna__count }}</td>
+                                                        </tr>                                                          
+
+                                                        {% endfor %}
+                                                        </tr>
+                                                    </table>    
+                                                </div>
+                                                                                                                                
+                                            </section>                                           
+                                                                                        
+                                    </div>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar reporte -->
+                                            
+                                            <section >
+                                                <header class="major">
+                                                    <h2>Reporte de emprendimientos</h2>
+                                                </header>
+                                                <div class="scrolled">
+                                                    <table class="table table-hover">
+                                                        <tr>
+                                                            <th><h6>N*</h6></th>
+                                                            <th><h6>Comuna</h6></th>
+                                                            <th><h6>Total Emprendimientos</h6></th>                                                                                                                
+                                                        </tr>                                                   
+                                                        {% for e in emprendimiento_count %}
+                                                        <tr >
+                                                            <td>{{ forloop.counter }}</td>
+                                                            <td>{{ e.comuna | title }}</td>                                                            
+                                                            <td>{{ e.comuna__count | title }}</td>                                                            
+                                                        </tr>                                                    
+                                                        {% endfor %}                                                                                  
+                                                    </table>    
+                                                </div>                                                                         
+                                            </section>                                           
+                                                                                        
+                                    </div>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar reporte -->
+                                            
+                                            <section >
+                                                <header class="major">
+                                                    <h2>Reporte de Productos</h2>
+                                                </header>
+                                                <div class="scrolled">
+                                                    <table class="table table-hover">
+                                                        <tr>
+                                                            <th><h6>N*</h6></th>
+                                                            <th><h6>Comuna</h6></th>
+                                                            <th><h6>Total Productos</h6></th>                                                                                                                
+                                                        </tr>  
+                                                        <!-- p  ={{ productos }}   -->
+                                                        <!-- pc  ={{ producto_count }} -->                                               
+                                                        {% for p in cant_productoXemprendimiento %}
+
+                                                            {% for e in emprendimiento_com %}
+                                                                <!-- p = {{ p }} -->
+                                                                {% if e.id_emprendimiento == p.id_emprendimiento_id  %}
+                                                                <tr >
+                                                                    <td>{{ forloop.counter }}</td>
+                                                                    <td>{{ e.comuna | title }}</td>
+                                                                    <td>{{ p.cant_prod | title }}</td>                           
+                                                                </tr>                                                    
+                                                                {% endif %}                                                                                    
+                                                            {% endfor %}                                                                                    
+                                                        {% endfor %}                                                                                    
+                                                    </table>    
+                                                </div>                                                                         
+                                            </section>                                           
+                                                                                        
+                                    </div>
+                                </div>
+                                <div class="col-6 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar reporte -->
+                                            
+                                            <section >
+                                                <header class="major">
+                                                    <h2>Reporte de Insumos</h2>
+                                                </header>
+                                                <div class="scrolled">
+                                                    <table class="table table-hover">
+                                                        <tr>
+                                                            <th><h6>N*</h6></th>
+                                                            <th><h6>Comuna</h6></th>
+                                                            <th><h6>Total Insumos</h6></th>                                                                                                                
+                                                        </tr>                                                   
+                                                        {% for i in cant_insumoXemprendimiento %}
+                                                            
+                                                            {% for e in emprendimiento_com %}
+                                                            
+                                                                {% if e.id_emprendimiento == i.id_emprendimiento_id  %}
+                                                                <tr >
+                                                                    <td>{{ forloop.counter }}</td>
+                                                                    <td>{{ e.comuna | title }}</td>
+                                                                    <td>{{ i.cant_insum | title }}</td>                           
+                                                                </tr>                                                    
+                                                                {% endif %}                                                                                    
+                                                            {% endfor %}                                                                                    
+                                                        {% endfor %}                                                                                                    
+                                                    </table>    
+                                                </div>                                                                        
+                                            </section>                                           
+                                                                                        
+                                    </div>
+                                </div>
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+
+
+            
+
+    </div>
+    
+    
+{% endblock %}
+</body>
+
+
+

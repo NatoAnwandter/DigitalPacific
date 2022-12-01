@@ -1,0 +1,93 @@
+
+{% extends '../../../base.html' %}
+
+{% load static %}
+
+{% block css %}
+{% endblock %}
+
+{% block body-style %}
+<body class="left-sidebar is-preload">
+    <div id="page-wrapper">
+{% endblock %}
+
+
+
+
+{% block contenido %}
+            
+    
+                </div>
+            </div>
+            
+        <!-- Main Wrapper -->
+            <div id="main-wrapper">
+                <!-- <h1>ASESORIAS</h1> -->
+                <div class="">
+                    <div class="inner">
+                        <div class="container">                           
+                            <div class="row">
+                                <div class="col-12 col-12-medium">
+                                    <div id="sidebar">
+
+                                        <!-- Sidebar reporte -->
+                                            
+                                            <section >
+                                                <header class="major">
+                                                    <h2>Reporte de Asesorias</h2>
+                                                </header>
+                                                <div class="scrolled">
+                                                    <table class="table table-hover">                                                        
+                                                        <tr>
+                                                            <th><h6>N*</h6></th>
+                                                            <th><h6>Asesoria </h6></th>
+                                                            <th><h6>total emprendim. Si</h6></th>                                                                       
+                                                            <th><h6>total emprendim. No</h6></th>                                                                       
+                                                            <th><h6>total emprendim. No sabe</h6></th>                                                                       
+                                                        </tr>                                           
+                                                        
+                                                        
+                                                        <tr>
+                                                            <td> 1 </td>                                                            
+                                                            <td> Marketing</td>                                                            
+                                                            <td>{{ marketing_si }}</td>                                                            
+                                                            <td>{{ marketing_no }}</td>                                                            
+                                                            <td>{{ marketing_ns }}</td>                                                            
+                                                        </tr>
+                                                        <tr>
+                                                            <td> 2 </td>                                                            
+                                                            <td> A. Contable</td>                                                            
+                                                            <td>{{ contable_si }}</td>
+                                                            <td>{{ contable_no }}</td>
+                                                            <td>{{ contable_ }}</td> <!-- este es un valor vacio de relleno --> 
+                                                        </tr>                                                           
+
+                                                        
+                                                        </tr>
+                                                    </table>    
+                                                </div>
+                                                                                                                                
+                                            </section>                                           
+                                                                                        
+                                    </div>
+                                </div>
+
+ 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+
+
+            
+
+    </div>
+    
+    
+{% endblock %}
+</body>
+
+
+

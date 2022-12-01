@@ -29,11 +29,11 @@
                                 <div class="col-12 col-12-medium">
                                     <div id="sidebar">
 
-                                        <!-- Sidebar -->
+                                        <!-- Sidebar reporte -->
                                             
                                             <section >
                                                 <header class="major">
-                                                    <h2>Lista de emprendimientos registrados</h2>
+                                                    <h2>ANALISIS ACÁ</h2>
                                                 </header>
                                                 <div class="scrolled">
                                                     <table class="table table-hover">
@@ -54,14 +54,14 @@
                                                             <td>{{ e.nombre | title }}</td>
                                                             <td>{{ e.id_industria | title }}</td>
                                                             <td>{{ e.id_perfil_emprendedora | title }}</td>
-                                                            <td>{{ e.comuna | title }}</td>                                                        
+                                                            <td>{{ e.id_comuna | title }}</td>                                                        
                                                             <td>{{ e.email | title }}</td>
                                                             <td>{{ e.website | title }}</td>
                                                             <td>{{ e.id_marketing | title }}</td>
-                                                            <td>{{ e.id_asesoria_contable | title }}</td>
+                                                            <td>{{ e.asesoria_contable | title }}</td>
                                                         </tr>                                                    
                                                         {% endfor %}  
-                                                                                                                                                               
+                                                              <h1>{{Emprendimiento.nombre}}</h1>                                                                                           
                                                     </table>    
                                                 </div>
                                                                                                                                 

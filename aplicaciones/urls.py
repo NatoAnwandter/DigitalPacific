@@ -21,4 +21,13 @@ urlpatterns = [
     path('t_emprendimiento/', t_emprendimiento, name = 't_emprendimiento'),
     path('t_producto/', t_producto, name = 't_producto'),
     path('t_insumo/', t_insumo, name = 't_insumo'),
+
+    path('reporte/', reporte, name = 'reporte'),
+    path('reporte_geografico/', reporte_geografico, name = 'reporte_geografico'),
+    path('reporte_asesoria/', reporte_asesoria, name = 'reporte_asesoria'),
+    path('reporte_industria/', reporte_industria, name = 'reporte_industria'),
+
+    path('analisis/', analisis, name = 'analisis'),
+    path('otros/', otros, name = 'otros')
+    
 ]

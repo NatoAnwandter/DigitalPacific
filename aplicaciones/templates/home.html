@@ -29,10 +29,10 @@
 										<a href="/emprendedora" class="button large icon solid fa-check-circle" style="display:none;">Registrarse</a>
 									</div> -->
 									<div class="col-lg-4 col-md-6 col-sm-12" >
-										<a href="#" class="button large icon solid fa-check-circle" >Reportes</a>
+										<a href="/reporte" class="button large icon solid fa-check-circle" >Reportes</a>
 									</div>					
 									<div class="col-lg-4 col-md-6 col-sm-12" >
-										<a href="#" class="button large icon solid fa-check-circle" >Análisis</a>
+										<a href="" class="button large icon solid fa-check-circle" >Análisis</a>
 									</div>
 									
 									<div class="col-lg-4 col-md-6 col-sm-12" >
@@ -85,6 +85,9 @@
 													<th><h6>Whatsapp</h6></th>                                                        
 													<th><h6>Télegram</h6></th>                                                        
 													<th><h6>Dirección</h6></th>                                                        
+													<th><h6>Comuna</h6></th>                                                        
+													<th><h6>Provincia</h6></th>                                                        
+													<th><h6>Región</h6></th>                                                        
 												</tr>
 												
 												{% for e in emprendedoras %}												
@@ -96,6 +99,9 @@
 													<td>{{ e.whatsapp | title }}</td>
 													<td>{{ e.telegram | title }}</td>
 													<td>{{ e.direccion | title }}</td>
+													<td>{{ e.comuna | title }}</td>
+													<td>{{ e.provincia | title }}</td>
+													<td>{{ e.region | title }}</td>
 												</tr>
 												{% endfor %}
 											</table>                                    

@@ -104,19 +104,21 @@ class AdminFormaActualizar(forms.ModelForm):
 # -----------------------------------------------ADMIN--------------------------------
 
 class Perfil_emprendedoraForm(forms.ModelForm):
-    
+
+
     class Meta:
         model = Perfil_emprendedora
-        fields = ["id_user","fecha_nacimiento",
-        "telefono", "whatsapp", "telegram", "direccion"]
+        fields = ["id_user","fecha_nacimiento", "telefono", "whatsapp", "telegram", "direccion", "comuna", "provincia", "region" 
+        ]
         
         error_css_class = 'error-field'
         require_css_class = 'required-field'
         
         widgets = {        
         "fecha_nacimiento": forms.DateInput(attrs={'type': 'date'}),
-        "direccion" : forms.Textarea(attrs={"rows":3})                
+        "direccion" : forms.Textarea(attrs={"rows":3}),               
         }
+        
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)
@@ -128,7 +130,7 @@ class EmprendimientoForm(forms.ModelForm):
     
     class Meta:
         model = Emprendimiento
-        fields = "id_comuna", "id_industria", "nombre", "email", "website", "id_marketing", "id_asesoria_contable"
+        fields = "id_industria", "nombre", "email", "website","comuna", "provincia", "region", "id_marketing", "id_asesoria_contable"
         
         error_css_class = 'error-field'
         require_css_class = 'required-field'
@@ -137,7 +139,6 @@ class EmprendimientoForm(forms.ModelForm):
         super().__init__(*args, **kwards)
         # self.fields['email'].widget.attrs.update({'class': 'form-control-2'})
         self.fields['nombre'].label = 'nombre del emprendimiento'
-        self.fields['id_comuna'].label = 'comuna'
         self.fields['id_industria'].label = 'industria'
         self.fields['id_marketing'].label = 'incluye marketing'
         self.fields['id_asesoria_contable'].label = 'incluye asesoria contable'
@@ -162,7 +163,7 @@ class InsumoForm(forms.ModelForm):
 
     class Meta:      
         model = Insumo
-        fields = "id_producto", "nombre", "id_cantidad", "id_frecuencia"
+        fields = "id_producto", "nombre", "id_cantidad", "id_frecuencia", "id_emprendimiento"
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)
@@ -170,6 +171,7 @@ class InsumoForm(forms.ModelForm):
         self.fields['nombre'].label = 'insumo'
         self.fields['id_cantidad'].label = 'cantidad'
         self.fields['id_frecuencia'].label = 'frecuencia'
+        self.fields['id_emprendimiento'].label = 'emprendimiento'
 
 class CantidadForm(forms.ModelForm):
 

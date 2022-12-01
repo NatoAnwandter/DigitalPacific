@@ -31,14 +31,40 @@ class Usuario(AbstractUser):
 # -----------------------------------------------------AGREGAR CAMPOS A AUTH USER ADMIN DJANGO ----------------------------------------------
 
 class Perfil_emprendedora(models.Model):
+    COMUNAS = (
+        ('Cerrillos', 'Cerrillos'),
+        ('El Bosque', 'El Bosque'),
+        ('La Reina', 'La Reina'),
+        ('Conchalí', 'Conchalí'),
+        ('Lo Prado', 'Lo Prado'),
+        ('Independencia', 'Independencia')
+    )
+
+    PROVINCIAS = (
+        ('Santiago', 'Santiago'),
+        ('Maipo', 'Maipo'),
+        ('Cordillera', 'Cordillera'),
+        ('Chacabuco', 'Chacabuco'),
+        ('Melipilla', 'Melipilla')
+    )
+
+    REGIONES = (
+        ('Rancagua', 'Rancagua'),
+        ('Santiago', 'Santiago'),
+        ('Valparaíso', 'Valparaíso')
+    )       
+
     id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_perfil_emprendedora = models.AutoField(primary_key=True)   
     fecha_nacimiento = models.DateField()     
     telefono = models.IntegerField()   
     whatsapp = models.IntegerField()   
     telegram = models.CharField(max_length=30)   
-    direccion = models.TextField(max_length=100)   
-    
+    direccion = models.TextField(max_length=100) 
+    comuna = models.CharField(choices = COMUNAS, max_length=50)   
+    provincia = models.CharField(choices = PROVINCIAS, max_length=50)   
+    region = models.CharField(choices = REGIONES, max_length=50)   
+
     def nombre_user(self):
         result = "{}". format(self. id_user)
         return result
@@ -131,41 +157,39 @@ class Industria(models.Model):
     def __str__(self):
         return self.name
 
-class Region(models.Model):
-    id_region = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45)
-
-    def __str__(self):
-        return self.nombre
-
-class Provincia(models.Model):
-    id_region = models.ForeignKey(Region, on_delete=models.CASCADE)
-    id_provincia = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45)
-    
-    def __str__(self):
-        return self.nombre
-
-
-class Comuna(models.Model):
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
-    id_comuna = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=45)
-    
-    def __str__(self):
-        return self.nombre
-
-
-
 
 class Emprendimiento(models.Model):
+    COMUNAS = (
+        ('Cerrillos', 'Cerrillos'),
+        ('El Bosque', 'El Bosque'),
+        ('La Reina', 'La Reina'),
+        ('Conchalí', 'Conchalí'),
+        ('Lo Prado', 'Lo Prado'),
+        ('Independencia', 'Independencia')
+    )
+
+    PROVINCIAS = (
+        ('Santiago', 'Santiago'),
+        ('Maipo', 'Maipo'),
+        ('Cordillera', 'Cordillera'),
+        ('Chacabuco', 'Chacabuco'),
+        ('Melipilla', 'Melipilla')
+    )
+
+    REGIONES = (
+        ('Rancagua', 'Rancagua'),
+        ('Santiago', 'Santiago'),
+        ('Valparaíso', 'Valparaíso')
+    )       
     id_perfil_emprendedora = models.ForeignKey(Perfil_emprendedora, on_delete=models.CASCADE)
-    id_comuna = models.ForeignKey(Comuna, on_delete=models.CASCADE)
     id_industria = models.ForeignKey(Industria, on_delete=models.CASCADE)
     id_emprendimiento = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=55)    
     email = models.CharField(max_length=125)    
     website = models.CharField(max_length=300)
+    comuna = models.CharField(choices = COMUNAS, max_length=50)   
+    provincia = models.CharField(choices = PROVINCIAS, max_length=50)   
+    region = models.CharField(choices = REGIONES, max_length=50)   
     id_marketing = models.ForeignKey(Marketing, on_delete=models.SET_NULL, blank=True, null=True)
     id_asesoria_contable = models.ForeignKey(Asesoria_contable, on_delete=models.SET_NULL, blank=True, null=True)
     
@@ -182,6 +206,7 @@ class Producto(models.Model):
             
     def __str__(self):
         return self.nombre
+        
 
 class Insumo(models.Model):
     id_user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
@@ -190,8 +215,8 @@ class Insumo(models.Model):
     nombre = models.CharField(max_length=45)
     id_cantidad = models.ForeignKey(Cantidad, on_delete=models.SET_NULL, blank=True, null=True )
     id_frecuencia = models.ForeignKey(Frecuencia, on_delete=models.SET_NULL, blank=True, null=True)
-    
-    
+    id_emprendimiento = models.ForeignKey(Emprendimiento, on_delete=models.CASCADE)
+        
     def __str__(self):
         return self.nombre
 
