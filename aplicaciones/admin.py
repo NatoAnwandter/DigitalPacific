@@ -51,7 +51,16 @@ class UserAdmin(BaseUserAdmin, ImportExportModelAdmin):
 # Register your models here.
 admin.site.register(Perfil_emprendedora)
 admin.site.register(Emprendimiento)
-
+admin.site.register(Asesoria_contable)
+admin.site.register(Marketing)
+admin.site.register(Producto, ProductoAdmin)
+admin.site.register(Despacho)
+admin.site.register(Insumo, InsumoAdmin)
+admin.site.register(Cantidad)
+admin.site.register(Frecuencia)
+admin.site.register(Industria)
+admin.site.register(Tipo_usuario)
+admin.site.register(Usuario, UserAdmin)
 
 
 

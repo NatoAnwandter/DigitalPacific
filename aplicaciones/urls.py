@@ -28,6 +28,6 @@ urlpatterns = [
     path('reporte_industria/', reporte_industria, name = 'reporte_industria'),
 
     path('analisis/', analisis, name = 'analisis'),
-    path('otros/', otros, name = 'otros')
+    path('chat/', chat, name = 'chat')
     
 ]

@@ -33,35 +33,21 @@
                                             
                                             <section >
                                                 <header class="major">
-                                                    <h2>OTROS ACÁ</h2>
+                                                    <h2>CHAT</h2>
                                                 </header>
                                                 <div class="scrolled">
                                                     <table class="table table-hover">
                                                         <tr>
                                                             <th><h6>N*</h6></th>
-                                                            <th><h6>Emprendimiento</h6></th>
-                                                            <th><h6>Industria</h6></th>                                                        
-                                                            <th><h6>Emprendedora</h6></th>                                                        
-                                                            <th><h6>Comuna</h6></th>                                                           
-                                                            <th><h6>Email</h6></th>                                                        
-                                                            <th><h6>website</h6></th>                                                        
-                                                            <th><h6>Incluye Marketing</h6></th>                                                        
-                                                            <th><h6>Ases. Contable</h6></th>                                                        
+                                                                                                                   
                                                         </tr>                                                   
                                                         {% for e in emprendimientos %}
                                                         <tr >
                                                             <td>{{ forloop.counter }}</td>
-                                                            <td>{{ e.nombre | title }}</td>
-                                                            <td>{{ e.id_industria | title }}</td>
-                                                            <td>{{ e.id_perfil_emprendedora | title }}</td>
-                                                            <td>{{ e.id_comuna | title }}</td>                                                        
-                                                            <td>{{ e.email | title }}</td>
-                                                            <td>{{ e.website | title }}</td>
-                                                            <td>{{ e.id_marketing | title }}</td>
-                                                            <td>{{ e.asesoria_contable | title }}</td>
+                                                            
                                                         </tr>                                                    
                                                         {% endfor %}  
-                                                              <h1>{{Emprendimiento.nombre}}</h1>                                                                                           
+                                                                                                                                                  
                                                     </table>    
                                                 </div>
                                                                                                                                 
