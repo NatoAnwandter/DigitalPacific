@@ -48,9 +48,11 @@
                                                             <td>{{ forloop.counter }}</td>
                                                             <td>{{ f.comuna }}</td>
                                                             <td>{{ f.comuna__count }}</td>
-                                                        </tr>                                                          
+                                                        </tr>
+                                                                                                                  
 
                                                         {% endfor %}
+
                                                         </tr>
                                                     </table>    
                                                 </div>
@@ -106,10 +108,10 @@
                                                         </tr>  
                                                         <!-- p  ={{ productos }}   -->
                                                         <!-- pc  ={{ producto_count }} -->                                               
-                                                        {% for p in cant_productoXemprendimiento %}
+                                                        <!-- {% for p in cant_productoXemprendimiento %}
 
                                                             {% for e in emprendimiento_com %}
-                                                                <!-- p = {{ p }} -->
+                                                                 p = {{ p }} 
                                                                 {% if e.id_emprendimiento == p.id_emprendimiento_id  %}
                                                                 <tr >
                                                                     <td>{{ forloop.counter }}</td>
@@ -118,7 +120,20 @@
                                                                 </tr>                                                    
                                                                 {% endif %}                                                                                    
                                                             {% endfor %}                                                                                    
-                                                        {% endfor %}                                                                                    
+                                                        {% endfor %}   -->
+                                                        {% for p in indice.items %}
+
+                                                            
+                                                                <!-- p = {{ p }} -->
+                                                                
+                                                                <tr >
+                                                                    <td>{{ forloop.counter }}</td>
+                                                                    <td>{{ p.0 | title }}</td>
+                                                                    <td>{{ p.1 | title }}</td>                           
+                                                                </tr>                                                    
+                                                                                                                                                   
+                                                                                                                                               
+                                                        {% endfor %}                                                                                   
                                                     </table>    
                                                 </div>                                                                         
                                             </section>                                           
@@ -141,18 +156,13 @@
                                                             <th><h6>Comuna</h6></th>
                                                             <th><h6>Total Insumos</h6></th>                                                                                                                
                                                         </tr>                                                   
-                                                        {% for i in cant_insumoXemprendimiento %}
-                                                            
-                                                            {% for e in emprendimiento_com %}
-                                                            
-                                                                {% if e.id_emprendimiento == i.id_emprendimiento_id  %}
-                                                                <tr >
-                                                                    <td>{{ forloop.counter }}</td>
-                                                                    <td>{{ e.comuna | title }}</td>
-                                                                    <td>{{ i.cant_insum | title }}</td>                           
-                                                                </tr>                                                    
-                                                                {% endif %}                                                                                    
-                                                            {% endfor %}                                                                                    
+                                                        {% for i in insumosCount.items %}                                                            
+                                                            <tr >
+                                                                <td>{{ forloop.counter }}</td>
+                                                                <td>{{ i.0 | title }}</td>
+                                                                <td>{{ i.1 | title }}</td>                           
+                                                            </tr>                                                    
+                                                                                                                                              
                                                         {% endfor %}                                                                                                    
                                                     </table>    
                                                 </div>                                                                        

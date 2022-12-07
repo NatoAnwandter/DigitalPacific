@@ -154,10 +154,10 @@ class ProductoForm(forms.ModelForm):
 
     def __init__(self,*args, **kwards):
         super().__init__(*args, **kwards)
-        # self.fields['email'].widget.attrs.update({'class': 'form-control-2'})
         self.fields['id_emprendimiento'].label = 'emprendimiento'
         self.fields['nombre'].label = 'producto'
         self.fields['id_despacho'].label = 'incluye despacho'
+        
 
 class InsumoForm(forms.ModelForm):
 

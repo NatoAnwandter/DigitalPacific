@@ -6,7 +6,7 @@ from .models import Emprendimiento ,Producto, Insumo, Cantidad, Perfil_emprended
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from urllib import request
-from django.db.models import Count, Sum
+from django.db.models import Count, Sum, Subquery
 # from user.models import Usuario
 
 
@@ -311,11 +311,67 @@ def reporte_geografico(request):
         
         productos = Producto.objects.all()
         
-        cant_productoXemprendimiento= Producto.objects.values("id_emprendimiento_id").annotate(cant_prod=Count("nombre"))
-        emprendimiento_com = Emprendimiento.objects.values("id_emprendimiento","comuna")        
-        cant_insumoXemprendimiento= Insumo.objects.values("id_emprendimiento_id").annotate(cant_insum=Count("nombre"))
+        cant_productoXemprendimiento= Producto.objects.values("id_emprendimiento_id").annotate(cant_prod=Count("id_producto"))
+        emprendimiento_com = Emprendimiento.objects.values("id_emprendimiento","comuna")       
+        cant_insumoXemprendimiento= Insumo.objects.values("id_emprendimiento_id").annotate(cant_insum=Count("id_producto"))
+
+
+        # tab1 = Emprendimiento.objects.filter(id_emprendimiento__id_emprendimiento_id = 1) #Unsupported lookup 'id_emprendimiento_id' for AutoField or join on the field not permitted
+        tab1 = Emprendimiento.objects.get(id_emprendimiento=5)
+        tab2 = tab1.comuna
+        print('tab1= ',tab2) #tab1=  Lo Prado
+
+        tab3 = set()
+
+        for e in Producto.objects.filter(id_emprendimiento_id=1).select_related('id_emprendimiento'):
+            tab3.add(e.nombre)
+
+        emp1 = Producto.objects.all().select_related('id_emprendimiento').annotate(this=Count("id_producto"))
+        emp2 = Insumo.objects.all().select_related('id_emprendimiento').annotate(this=Count("id_insumo"))
         
         
+        c = 0  
+        
+        indice = {}      
+        for u in emp1:
+            c += 1
+            # print(c,"=", u.id_emprendimiento.comuna, "=", u.nombre, u.this)
+            
+            if u.id_emprendimiento.comuna in indice:
+
+                indice[u.id_emprendimiento.comuna]+=1
+            else:
+                indice[u.id_emprendimiento.comuna]=1
+                
+        print(indice)        
+        
+        r = 0
+        insumosCount ={}
+        for l in emp2:
+            r += 1
+
+            if l.id_emprendimiento.comuna in insumosCount:
+
+                insumosCount[l.id_emprendimiento.comuna]+=1
+            else:
+                insumosCount[l.id_emprendimiento.comuna]=1
+        print(insumosCount)
+    
+
+            
+       
+       
+               
+
+
+        print('tab3= ',tab3) #tab3=  {'pan', 'berlín'}
+        # https://docs.djangoproject.com/en/1.10/ref/models/querysets/#select-related
+        # b = Producto.objects.select_related('id_emprendimiento').get(id_emprendimiento=4) #get() returned more than one Producto -- it returned 3!
+        # b = Producto.objects.get(id_emprendimiento=1)
+        # p = b.comuna
+
+        # print('p= ',p)
+
 
         data = {            
             'emprendedoras': emprendedoras,            
@@ -329,7 +385,10 @@ def reporte_geografico(request):
             'productos' : productos,
             'cant_productoXemprendimiento' : cant_productoXemprendimiento,
             'emprendimiento_com' : emprendimiento_com,
-            'cant_insumoXemprendimiento' : cant_insumoXemprendimiento
+            'cant_insumoXemprendimiento' : cant_insumoXemprendimiento,
+            'emp1' : emp1,
+            'indice': indice, 
+            'insumosCount': insumosCount
         }
 
         return render(request,'admin/1_reporte_menu/r_geografico/r_geografico.html', data)
