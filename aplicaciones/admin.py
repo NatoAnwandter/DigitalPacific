@@ -62,7 +62,10 @@ admin.site.register(Industria)
 admin.site.register(Tipo_usuario)
 admin.site.register(Usuario, UserAdmin)
 
+#---------------------- Chat -----------------------------
 
+admin.site.register(Message_chat)
+admin.site.register(Sala_chat)
 
 
 

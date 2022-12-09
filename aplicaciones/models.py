@@ -4,6 +4,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
+from datetime import datetime
 
 class Tipo_usuario(models.Model):   
     id_tipo_usuario = models.AutoField(primary_key=True) 
@@ -222,6 +223,28 @@ class Insumo(models.Model):
 
 
 
+#------------------------- Chat ------------------------------------------------------------------------------------
+# Create your models here.
+class Sala_chat(models.Model):
+    name = models.CharField(max_length=1000)
+    users = models.ManyToManyField(Usuario)
+
+    def __str__(self):
+        return self.name
+
+
+# class AsignacionChat(models.Model):
+#     room = models.ForeignKey(Room, on_delete=models.CASCADE)
+#     users = models.ManyToManyField(Perfil_emprendedora)
+
+
+class Message_chat(models.Model):
+    value = models.CharField(max_length=500)
+    date  = models.DateTimeField(default=datetime.now, blank = True)
+    user = models.CharField(max_length=500)
+    room = models.CharField(max_length=500)
+    # user  = models.ForeignKey(User, on_delete=models.CASCADE)
+    # room  = models.ForeignKey(Room, on_delete=models.CASCADE)
 
 
 

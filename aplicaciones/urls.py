@@ -28,6 +28,18 @@ urlpatterns = [
     path('reporte_industria/', reporte_industria, name = 'reporte_industria'),
 
     path('analisis/', analisis, name = 'analisis'),
-    path('chat/', chat, name = 'chat')
     
+    
+    #---------------------------- chat -------------------------------------------------
+    #tempalte principal de chats
+    path('chat/', chat, name = 'chat'),
+    #template de un chat en especifico
+    path('<str:room>/', room, name='room'),
+    #redirecciona aun chat con los parametros especificados
+    path('entrar_chat/<room>', entrar_chat, name ='entrar_chat'),
+    #Enviar mensaje
+    path('send', send, name='send'),
+    #mostrar mensajes
+    path('getMessages/<str:room>/', getMessages, name='getMessages'),
+
 ]

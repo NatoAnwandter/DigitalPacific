@@ -62,7 +62,7 @@
 												<li><a href="/producto">Productos</a></li>
 												<li><a href="/insumo">Insumos</a></li>																																						
 												<li>
-													<a href="{% url 'logout' %}">cerrar sesión</a>
+													<a href="{% url 'logout' %}" >cerrar sesión</a>
 												</li>
 												<li>
 													<a href="#">Hola @{{ user.username }}</a>
@@ -70,7 +70,7 @@
 										{% endif %}
 									{% else %}
 												<li>
-													<h1 style="font-size: 22px;"><a href="{% url 'login' %}">iniciar sesión</a></h1>
+													<h1 style="font-size: 22px;"><a href="{% url 'login' %}" >iniciar sesión</a></h1>
 												</li>
 													
 									{% endif %}
@@ -90,32 +90,24 @@
 						<!-- <div class="row">						 -->
 							
 								<!-- Contact -->
-									<section >
-										<h2>Get in touch</h2>
+									<section class="footer1">
+										<h6>Get in touch</h6>
 										<div>
-											<div class="row">
-												<div class="col-6 col-12-small">
-													<dl class="contact">
+											<div class="row" >
+												<div id="foot" class="col-6 col-12-small">
+													<dl  class="contact">
 														<dt>Twitter</dt>
 														<dd><a href="#">@untitled-corp</a></dd>
 														<dt>Facebook</dt>
-														<dd><a href="#">facebook.com/untitled</a></dd>
-														<dt>WWW</dt>
-														<dd><a href="#">untitled.tld</a></dd>
-														<dt>Email</dt>
-														<dd><a href="#">user@untitled.tld</a></dd>
+														<dd ><a href="#">facebook.com/untitled</a></dd>														
 													</dl>
 												</div>
-												<div class="col-6 col-12-small ">
-													<dl class="contact">
-														<dt>Address</dt>
-														<dd>
-															1234 Fictional Rd<br />
-															Nashville, TN 00000-0000<br />
-															USA
-														</dd>
-														<dt>Phone</dt>
-														<dd>(000) 000-0000</dd>
+												<div id="foot" class="col-6 col-12-small ">
+													<dl  class="contact">
+														<dt >WWW</dt>
+														<dd><a href="#">untitled.tld</a></dd>
+														<dt >Email</dt>
+														<dd><a href="#">user@untitled.tld</a></dd>
 													</dl>
 												</div>
 											</div>

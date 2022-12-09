@@ -16,21 +16,6 @@
 .not-visible{
     display: none;
 }
-
-.scrolled {
-    height: 500px;
-    width: 100%;
-    overflow-y: scroll;
-    overflow-x: scroll;
-}
-
-.scrolled::-webkit-scrollbar {
-    width: 8px;     /* Tamaño del scroll en vertical */
-    height: 8px;    /* Tamaño del scroll en horizontal */
-    display: none;  /* Ocultar scroll */
-}
-
-
 .button.large {
     padding: 1em 1.5em!important;
     width: 280px;
@@ -38,4 +23,37 @@
 
 .logoEmprendedora {
     font-size: 20px;
+}
+
+/*Webkit*/
+.scrolled {
+    height: 500px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+#logout1{
+    color: crimson!important;
+    
+}
+
+#copyright{
+    padding: 1em 0 0em 0!important;
+}
+
+.footer1{
+    margin-bottom: -3em!important;
+    /* padding:1em 0; */
+    /* text-align: center; */
+   
+}
+
+#foot{
+   padding-top: 0px!important;  
+}
+
+body{
+    margin:0!important;
+    min-height: 100vh!important;
 }

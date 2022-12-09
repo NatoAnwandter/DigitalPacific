@@ -1,12 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from .forms import Perfil_emprendedoraForm ,EmprendimientoForm ,ProductoForm, InsumoForm, CantidadForm, UsuarioForm
-from .models import Emprendimiento ,Producto, Insumo, Cantidad, Perfil_emprendedora, User, Industria
+from .models import Emprendimiento ,Producto, Insumo, Cantidad, Perfil_emprendedora, User, Industria, Sala_chat, Message_chat
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from urllib import request
 from django.db.models import Count, Sum, Subquery
+from django.contrib.auth.decorators import login_required
+from .DBHelperChat import DBHelper
+from django.shortcuts import get_object_or_404
 # from user.models import Usuario
 
 
@@ -281,14 +284,6 @@ def analisis(request):
         return render(request,'admin/access_denied.html')
 
 
-def chat(request): 
-    if request.user.is_staff:
-        
-        emprendimientos = Emprendimiento.objects.all()
-
-        return render(request,'admin/3_chat/chat.html')
-    else:
-        return render(request,'admin/access_denied.html')
 
 
 # --------------------------------------------REPORTES-------------------------------------------------------------------------
@@ -392,3 +387,88 @@ def reporte_industria(request):
         return render(request,'admin/1_reporte_menu/r_industria/r_industria.html',data)
     else:
         return render(request, 'admin/access_denied.html')
+
+# --------------------------------------------Chat------------------------------------------------------------------------
+#funcion para ver una lista de los usuarios con lo que puedes hablar
+def chat(request): 
+    #traigo funcion creada en dbhelper.py
+    db = DBHelper()
+    #Traigo todas las room que tiene el uario logiado
+    rooms  = Sala_chat.objects.filter(users = request.user.id)
+    #Creo un diccionario vacio
+    dicc_users = {}
+    #Recorro las rooms
+    for r in rooms:
+        #Inicializo la consulta select__user
+        ff = db.select_user(r.name, request.user.username)
+        #Recorro los registro de la consulta
+        for f in ff:
+            #Guardo en el diccionario como keys las id de las rooms y guardo como value el nombre los usuarios con lo que de deseo hablar
+            dicc_users[f[0]] = f[1]
+
+    #Guardo las keys
+    clave_users = dicc_users.keys()
+    #Guardo los valores
+    valor_users = dicc_users.values()
+    #Guardo la cantidad de registros
+    cantidad_users = dicc_users.items()
+
+    data = {
+        "rooms": rooms,
+        "clave_users":clave_users,
+        "valor_users":valor_users,
+        "cantidad_users":cantidad_users,
+    } 
+    
+    return render(request,'chat/mi_chat.html', data)
+   
+
+#Sala que contiene los mensajes de un chat
+@login_required
+def room(request, room):
+    username = request.GET.get('username')
+    #Traigo la sala en la cual su nombre sea igual al parametro room
+    room_details = get_object_or_404(Sala_chat, name=room)
+    #room_details = Room.objects.get(name=room)
+    
+    data = {
+        'username': username,
+        'room':room,
+        'room_details': room_details,
+
+    }
+
+    return render(request, 'chat/room.html',data)
+    
+
+
+#Funcion para entrar a un chat especifico
+def entrar_chat(request, room):
+        #Nombre del usuario logiado
+        username = request.user.username
+        return redirect('/'+room+'/?username='+username)
+            
+
+#Funcion para enviar mensajes
+def send(request):
+    #Entro los campos por formulario
+    message = request.POST['message']      
+    username = request.POST['username']    
+    room_id = request.POST['room_id']      
+    #Creo un mensaje
+    new_message = Message_chat.objects.create(value=message, user=username, room=room_id)
+    #Guardo el mensaje
+    new_message.save()
+    return HttpResponse('Message send Successfully')
+
+
+#Funcion para mostar los mensajes 
+def getMessages(request, room):
+    print("Estoy en getMessages")
+    #Traigo el Room que tiene el mismo nombre que el parametro room
+    room_details = Sala_chat.objects.get(name = room)
+    #Traigo los mensajes filtrando por el room
+    messages = Message_chat.objects.filter(room = room_details.id)
+    print("los mensajes son:", messages)
+    #Retorno un archivo JSON con los mensajes
+    return JsonResponse({"messages":list(messages.values())})
