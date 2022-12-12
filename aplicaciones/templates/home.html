@@ -17,9 +17,8 @@
 					<!-- Banner -->
 					{% if user.is_staff %}
 						<div id="banner">
-							<h2 class="col-12"><strong>Emprendedoras:</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-							built on HTML5 and CSS3 by <a href="http://html5up.net">HTML5 UP</a></h2>
-							<p>Does this statement make you want to click the big shiny button?</p>
+							<h2 class="col-12"><strong>Bienvenido Administrador: {{ user }} </strong></h2>
+							<p></p>
 							<br>
 							<br>
 							<br>
@@ -45,10 +44,9 @@
 							
 						</div>
 						{% else %}
-						<div id="banner">
-							<h2><strong>Emprendedora:</strong>Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-							built on HTML5 and CSS3 by <a href="http://html5up.net">HTML5 UP</a></h2>
-							<p>Does this statement make you want to click the big shiny button?</p>
+						<div id="banner">							
+							<h2><strong>Bienvenida emprendedora: {{ user }}</strong></h2>							
+							<p>Este es un espacio especial para que nos cuentes de tus emprendimientos</p>
 							<a href="/emprendedora" class="button large icon solid fa-check-circle " style="display:none;">Registrarse</a>
 						</div>
 					{% endif %}
@@ -117,32 +115,29 @@
 						<div class="inner">
 							<div class="container">
 								<div class="row">
-									<div class="col-8 col-12-medium">
+									<div class="col-12 col-12-medium">
 
 										<!-- Article list -->
 											<section class="box article-list">
-												<h2 class="icon fa-file-alt">Recent Posts</h2>
+												<h2 class="icon fa-file-alt">Publicaciones</h2>
 
 												<!-- Excerpt -->
 													<article class="box excerpt">
-														<a href="#" class="image left"><img src="{% static 'images/pic04.jpg' %}" alt="" /></a>
+														<a class="image left"><img src="{% static 'assets/css/images/et02.png' %}" alt="" /></a>
 														<div>
 															<header>
-																<span class="date">July 24</span>
-																<h3><a href="#">Repairing a hyperspace window</a></h3>
+																<span class="date">Junio 2021</span>
+																<h3><a href="https://registropymes.economia.gob.cl/">Registro Nacional de Pymes</a></h3>
 															</header>
-															<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus
-															semper mod quisturpis nisi consequat etiam lorem. Phasellus quam turpis,
-															feugiat et sit amet ornare in, hendrerit in lectus semper mod quis eget mi dolore.</p>
+															<p>Con el objetivo de que las micro, pequeñas y medianas empresas accedan a
+																futuros beneficios del Estado de forma rápida y oportuna, el
+																17 de junio de 2021 se publicó en el diario oficial la Ley 21.354, en que
+																se otorga una serie de bonos de ayuda para las pymes y crea, en su artículo 14,
+																el Registro Nacional de Micro, Pequeñas y Medianas Empresas.</p>
 														</div>
-													</article>
-
-												
-												
-
+													</article>	
 											</section>
-									</div>
-									
+									</div>									
 								</div>
 							</div>
 						</div>
@@ -159,9 +154,11 @@
 										<div class="col-12">
 											<header class="first major">
 												<h2>Que puedes compartir en este espacio</h2>
-												<p>Cuentanos todo sobre tu emprendimiento <strong>Y te ayudamos a crecer</strong> ...</p>
+												<p>Cuentanos todo sobre tu emprendimiento<strong>Y te ayudamos a crecer</strong> ...</p>
 												<!---------------------------------------------------------------------------------------------------------------->
-												<a href="/chat" class="button large icon solid fa-check-circle" >Chat</a>
+												{% if user.is_active %} 
+													<a href="/chat" class="button large icon solid fa-check-circle" >Chat</a>
+												{% endif %}
 											</header>
 										</div>
 										<div class="col-4 col-12-medium">
@@ -192,10 +189,14 @@
 											</section>
 										</div>
 										<div class="col-12">
-											<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus. Praesent semper
-											bibendum ipsum, et tristique augue fringilla eu. Vivamus id risus vel dolor auctor euismod
-											quis eget mi. Etiam eu ante risus. Aliquam erat volutpat. Aliquam luctus mattis lectus sit
-											amet pulvinar. Nam nec turpis.</p>
+											<p> En Digital Pacific, queremos que tu, emprendedora y todas nuestras colegas de los diferentes 
+												emprendimientos que ofrecen para sus barrios y alrededores, crescan y se desarrollen de la mejor manera 
+												haciendo que tu emprendimiento sea competitivo gracias a la union y el apoyo de todos y todas.
+												Lo que es bueno para ti, lo es para mi y para todos, y este es el medio para hacerlo,
+												logremos juntos cumplir nuestras metas. Contamos con Expertos que te guiaran y enseñaran 
+												todo lo necesario para dar ese salto que tanto deseas lograr, y compartiremos consejos y datos que
+												nos facilitaran las decisiones.											 
+												</p>
 										</div>
 									</div>
 								</section>
@@ -211,49 +212,34 @@
 
 										<!-- Article list -->
 											<section class="box article-list">
-												<h2 class="icon fa-file-alt">Recent Posts</h2>
+												<h2 class="icon fa-file-alt">Publicaciones recientes</h2>
 
 												<!-- Excerpt -->
 													<article class="box excerpt">
-														<a href="#" class="image left"><img src="{% static 'images/pic04.jpg' %}" alt="" /></a>
+														<a class="image left"><img src="https://www.munistgo.cl/wp-content/uploads/2020/12/WhatsApp-Image-2020-12-31-at-19.29.12-12-293x190.jpeg" alt="" /></a>
 														<div>
 															<header>
-																<span class="date">July 24</span>
-																<h3><a href="#">Repairing a hyperspace window</a></h3>
+																<span class="date">21 de Diciembre</span>
+																<h3><a href="https://www.munistgo.cl/feria-navidena-de-pymes-en-el-paseo-bandera/">Feria Navideña en pymes</a></h3>
 															</header>
-															<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus
-															semper mod quisturpis nisi consequat etiam lorem. Phasellus quam turpis,
-															feugiat et sit amet ornare in, hendrerit in lectus semper mod quis eget mi dolore.</p>
+															<p>125 pymes para las compras de #Navidad ¡en el Paseo Bandera! Ven a #MercadoStgoEmprende, 
+																apoya a las pymes de la comuna y lleva regalos únicos para la familia y amigos. 
+																Estarán de hoy hasta el miércoles de 10h a 20h30 y el jueves 24-12, hasta a las 14h.</p>
 														</div>
 													</article>
 
 												<!-- Excerpt -->
 													<article class="box excerpt">
-														<a href="#" class="image left"><img src="{% static 'images/pic05.jpg' %}" alt="" /></a>
+														<a class="image left"><img src="https://www.propymechile.com/data/images/content/news/2022/12/12/d870c72bbf004235bfb797015bad05c4/cdfc4cd7-ed17-4392-890f-846c5961ddc7.jpg" alt="" /></a>
 														<div>
 															<header>
-																<span class="date">July 18</span>
-																<h3><a href="#">Adventuring with a knee injury</a></h3>
+																<span class="date">12 de Diciembre</span>
+																<h3><a href="https://www.propymechile.com/noticiaspymes/detail?id=d870c72bbf004235bfb797015bad05c4">Emocionar a us clientes, vende</a></h3>
 															</header>
-															<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus
-															semper mod quisturpis nisi consequat etiam lorem. Phasellus quam turpis,
-															feugiat et sit amet ornare in, hendrerit in lectus semper mod quis eget mi dolore.</p>
+															<p>Marisa Cozak entregó una serie de recomendaciones para que las Pymes puedan incorporar a 
+																los clientes como el centro de todo lo que realizan a diario en sus negocios.</p>
 														</div>
-													</article>
-
-												<!-- Excerpt -->
-													<article class="box excerpt">
-														<a href="#" class="image left"><img src="{% static 'images/pic06.jpg' %}" alt="" /></a>
-														<div>
-															<header>
-																<span class="date">July 14</span>
-																<h3><a href="#">Preparing for Y2K38</a></h3>
-															</header>
-															<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus
-															semper mod quisturpis nisi consequat etiam lorem. Phasellus quam turpis,
-															feugiat et sit amet ornare in, hendrerit in lectus semper mod quis eget mi dolore.</p>
-														</div>
-													</article>
+													</article>											
 
 											</section>
 									</div>
@@ -261,22 +247,17 @@
 
 										<!-- Spotlight -->
 											<section class="box spotlight">
-												<h2 class="icon fa-file-alt">Spotlight</h2>
+												<h2 class="icon fa-file-alt">Destacados</h2>
 												<article>
-													<a href="#" class="image featured"><img src="{% static 'images/pic07.jpg' %}" alt=""></a>
+													<a class="image featured"><img src="https://www.munistgo.cl/wp-content/uploads/2021/04/Calle-Hurtado-Rodriguez-Barrio-Yungay-293x190.jpeg" alt=""></a>
 													<header>
-														<h3><a href="#">Neural Implants</a></h3>
-														<p>The pros and cons. Mostly cons.</p>
+														<h3><a href="http://www.munistgo.info/revivestgo/vecinos-de-matta-y-yungay-podran-postular-a-fondos-para-revitalizar-sus-barrios-y-mejorar-sus-negocios/#:~:text=mejorar%20sus%20negocios-,Vecinos%20de%20Matta%20y%20Yungay%20podr%C3%A1n%20postular%20a%20fondos%20para,la%20SUBDERE%20y%20el%20BID.">Vecinos de Matta y Yungay podrán postular a fondos</a></h3>
+														<p>para revitalizar sus barrios y mejorar sus negocios. (27 de abril)</p>
 													</header>
-													<p>Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus semper mod
-													quisturpis nisi consequat ornare in, hendrerit in lectus semper mod quis eget mi quat etiam
-													lorem. Phasellus quam turpis, feugiat sed et lorem ipsum dolor consequat dolor feugiat sed
-													et tempus consequat etiam.</p>
-													<p>Lorem ipsum dolor quam turpis, feugiat sit amet ornare in, hendrerit in lectus semper
-													mod quisturpis nisi consequat etiam lorem sed amet quam turpis.</p>
-													<footer>
-														<a href="#" class="button alt icon solid fa-file-alt">Continue Reading</a>
-													</footer>
+													<p>A través de este programa se busca apoyar a un centenar de empresas de menor tamaño o mipymes,
+														con un monto de hasta 2 millones de pesos para cada una, con el objetivo de mejorar la 
+														competitividad, sostenibilidad y protección de las economías barriales, mediante capacitación, 
+														subvención de capital, mejoramiento de la infraestructura comercial...</p>		
 												</article>
 											</section>
 

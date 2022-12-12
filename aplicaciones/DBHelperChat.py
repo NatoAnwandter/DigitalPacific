@@ -10,6 +10,11 @@ class DBHelper:
             database    =   "bd_pacific",
             port = 3306
 
+#            host        =   'Nato.mysql.pythonanywhere-services.com',
+#            user        =   'Nato',
+#            password    =   "administrador",
+#            database    =   "Nato$default",
+
         )
     #Nombbre base de datos
     dbname = "bd_pacific"

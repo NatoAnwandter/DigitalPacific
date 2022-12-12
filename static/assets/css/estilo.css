@@ -57,3 +57,16 @@ body{
     margin:0!important;
     min-height: 100vh!important;
 }
+
+#footer a {
+    color: #080b11!important;
+}
+
+#footer {
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#footer dl.contact dt {
+    color: rgb(255, 255, 255)!important;
+    border-color: black!important;
+}
