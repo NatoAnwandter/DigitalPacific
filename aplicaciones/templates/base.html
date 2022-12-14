@@ -35,10 +35,10 @@
 								<div class="inner">
 									{% if user.is_authenticated %}
 										{% if user.is_staff %}
-									<!-- Logo -->
+									<!-- Logo ADMINISTRADOR-->
 										<h1 style="font-size: 22px;"><a href="/" id="logo">Emprendedoras</a></h1>
 
-									<!-- Nav -->
+									<!-- Nav ADMINISTRADOR-->
 										<nav id="nav">	
 											<ul>
 												<li><a href="/t_emprendimiento">Emprendimientos</a></li>
@@ -50,12 +50,13 @@
 												<li>
 													<a href="/admin">Hola @{{ user.username }}</a>
 												</li>													
-												
+											</ul>
+										</nav>	
 										{% elif user.is_active %}
-									<!-- Logo -->
+									<!-- Logo EMPRENDEDOR -->
 										<h1><a href="/" id="logo" class="logoEmprendedora">Emprendedora</a></h1>
 
-									<!-- Nav -->
+									<!-- Nav EMPRENDEDOR -->
 										<nav id="nav">	
 											<ul>													
 												<li><a href="/emprendimiento">Emprendimientos</a></li>
@@ -67,15 +68,22 @@
 												<li>
 													<a href="#">Hola @{{ user.username }}</a>
 												</li>
-										{% endif %}
-									{% else %}
-												<li>
-													<h1 style="font-size: 22px;"><a href="{% url 'login' %}" >iniciar sesión</a></h1>
-												</li>
-													
-									{% endif %}
-												</ul>
+											</ul>
 										</nav>
+										{% endif %}
+										
+									{% else %}
+									<!-- Nav LOGIN -->
+									<h1><a href="#" id="logo" >ingresar</a></h1>
+										<nav id="nav">
+											<ul>
+												<li>
+													<a href="{% url 'login' %}" >iniciar sesión</a>
+												</li>
+											</ul>
+										</nav>	
+									{% endif %}
+										
 								</div>
 							</header>
 				
